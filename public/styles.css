@@ -1,0 +1,57 @@
+body {
+  font-family: 'Lato', sans-serif;
+  color: #012a36;
+  background: linear-gradient(#f5f5f5, #f5f5f5);
+  padding-top: 107px;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  text-decoration: none;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
+/* .logo {
+  font-family: 'Russo One', sans-serif;
+} */
+
+.PantrySingle {
+  text-align: center;
+}
+
+table,
+td {
+  border: 1px solid #012a36;
+}
+
+thead,
+tfoot {
+  background-color: #012a36;
+  color: #f5f5f5;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 150px;
+}
+
+#app {
+  margin-bottom: 200px;
+}
