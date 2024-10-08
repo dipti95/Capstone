@@ -47,7 +47,7 @@ const AuthForm = ({ name, displayName }) => {
         </Form>
       </div>
       <div className={styles.authPageImgContainer}>
-        <img id={styles.authPageImg} src="/.jpg" />
+        <img id={styles.authPageImg} src="/Login.jpg" />
       </div>
     </Container>
   )
