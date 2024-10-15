@@ -2,7 +2,16 @@
 
 const {
   db,
-  models: { User },
+  models: {
+    User,
+    Recipe,
+    RecipeIngredient,
+    ShoppingList,
+    ShoppingListIngredient,
+    Ingredient,
+    Pantry,
+    PantryIngredient,
+  },
 } = require("../server/db")
 
 /**
@@ -47,5 +56,4 @@ if (module === require.main) {
   runSeed()
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed

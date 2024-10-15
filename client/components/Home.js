@@ -10,6 +10,7 @@ const Home = (props) => {
   return (
     <div>
       <h3>Welcome, {username}</h3>
+      <img src="/Login.jpg" />
     </div>
   )
 }
