@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { authenticate } from "../store"
 import styles from "./AuthForm.module.css"
 import { Form, Button, Container } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 /**
  * COMPONENT
@@ -43,6 +44,11 @@ const AuthForm = ({ name, displayName }) => {
           <Button variant="danger" className={styles.button} type="submit">
             {displayName}
           </Button>
+          {name === "login" && (
+            <div>
+              <Link to="/forgot-password">Forgot your password?</Link>
+            </div>
+          )}
           {error && error.response && <div> {error.response.data} </div>}
         </Form>
       </div>
