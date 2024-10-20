@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { forgotPassword } from "../store/auth" // Import the action
+import { forgotPassword } from "../store/auth"
 import { Form, Button, Container } from "react-bootstrap"
 import styles from "./AuthForm.module.css"
 
@@ -12,7 +12,7 @@ const ForgotPasswordForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    dispatch(forgotPassword(username, newPassword)) // Dispatch the action with username and new password
+    dispatch(forgotPassword(username, newPassword))
   }
 
   return (
