@@ -19,6 +19,20 @@ const Navbar = () => {
         <nav>
           {isLoggedIn ? (
             <Container className={styles.signedInLinks}>
+              <Link to="/foods" className={styles.navBarLink}>
+                Foods
+              </Link>
+
+              <Link to="/list" className={styles.navBarLink}>
+                Shopping List
+              </Link>
+
+              <Link to="/pantries" className={styles.navBarLink}>
+                Pantry
+              </Link>
+              <Link to="/recipes" className={styles.navBarLink}>
+                Recipes
+              </Link>
               <NavDropdown
                 title={<FaUserCircle size={25} />}
                 id={styles.navdropdown}

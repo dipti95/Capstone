@@ -13,6 +13,46 @@ const User = db.define("user", {
   password: {
     type: Sequelize.STRING,
   },
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: true,
+    },
+  },
+  cuisinePref: {
+    type: Sequelize.ENUM(
+      "American",
+      "Asian",
+      "British",
+      "Caribbean",
+      "Central Europe",
+      "Chinese",
+      "Eastern Europe",
+      "French",
+      "Indian",
+      "Italian",
+      "Japanse",
+      "Kosher",
+      "Mediterranean",
+      "Mexican",
+      "Middle Eastern",
+      "Nordic",
+      "South American",
+      "South East Asian",
+      "No Preference"
+    ),
+    defaultValue: "No Preference",
+  },
+
+  diet: {
+    type: Sequelize.STRING,
+    defaultValue: "",
+  },
+
+  health: {
+    type: Sequelize.STRING,
+    defaultValue: "",
+  },
 })
 module.exports = User
 
@@ -34,6 +74,7 @@ User.prototype.generateToken = function () {
 User.authenticate = async function ({ username, password }) {
   const user = await this.findOne({ where: { username } })
   if (!user || !(await user.correctPassword(password))) {
+    console.log("UserNotFound---------------------")
     const error = Error("Incorrect username/password")
     error.status = 401
     throw error
