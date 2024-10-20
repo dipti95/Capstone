@@ -50,4 +50,23 @@ router.put("/me", async (req, res, next) => {
   }
 })
 
+router.put("/forgot-password", async (req, res, next) => {
+  try {
+    const { username, newPassword } = req.body
+
+    const user = await User.findOne({ where: { username } })
+
+    if (!user) {
+      return res.status(404).send("User not found")
+    }
+
+    user.password = newPassword
+    await user.save()
+
+    res.send({ message: "Password has been reset successfully." })
+  } catch (error) {
+    next(error)
+  }
+})
+
 console.log("AUTH----------------LAST")

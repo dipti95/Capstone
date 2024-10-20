@@ -5,6 +5,8 @@ import { Login, Signup } from "./components/AuthForm"
 import Home from "./components/Home"
 import { me } from "./store"
 
+import ForgotPasswordForm from "./components/ForgotPasswordForm"
+
 /**
  * COMPONENT
  */
@@ -28,6 +30,7 @@ const Routes = () => {
         <Switch>
           <Route path="/login">{Login}</Route>
           <Route path="/signup">{Signup}</Route>
+          <Route path="/forgot-password" component={ForgotPasswordForm} />
         </Switch>
       )}
     </div>

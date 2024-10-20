@@ -61,6 +61,20 @@ export const logout = () => {
   }
 }
 
+export const forgotPassword = (username, newPassword) => async (dispatch) => {
+  try {
+    await axios.put("/auth/forgot-password", { username, newPassword })
+
+    dispatch(setAuth({}))
+
+    history.push("/login")
+  } catch (error) {
+    dispatch(
+      setAuth({ error: error.response?.data || "Error resetting password" })
+    )
+  }
+}
+
 /**
  * REDUCER
  */
