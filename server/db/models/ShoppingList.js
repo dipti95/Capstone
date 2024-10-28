@@ -1,10 +1,10 @@
-const Sequelize = require("sequelize")
-const db = require("../db")
+const Sequelize = require('sequelize');
+const db = require('../db');
 
-const ShoppingList = db.define("shoppingList", {
+const ShoppingList = db.define('shoppingList', {
   name: {
     type: Sequelize.STRING,
-    defaultValue: "",
+    defaultValue: '',
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -12,8 +12,8 @@ const ShoppingList = db.define("shoppingList", {
   },
 
   status: {
-    type: Sequelize.ENUM("open", "closed"),
-    defaultValue: "open",
+    type: Sequelize.ENUM('open', 'closed'),
+    defaultValue: 'open',
   },
 
   totalCost: {
@@ -22,8 +22,8 @@ const ShoppingList = db.define("shoppingList", {
   },
 
   checkoutDate: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING,
   },
-})
+});
 
-module.exports = ShoppingList
+module.exports = ShoppingList;

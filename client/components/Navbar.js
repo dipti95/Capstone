@@ -14,14 +14,14 @@ const Navbar = () => {
     <Nav fixed="top" className={styles.navBar}>
       <Container>
         <Link to="/">
-          <h1>FOODBUDDY</h1>
+          <h1 className={styles.logo}>FOODBUDDY</h1>
         </Link>
         <nav>
           {isLoggedIn ? (
             <Container className={styles.signedInLinks}>
-              <Link to="/foods" className={styles.navBarLink}>
+              {/* <Link to="/foods" className={styles.navBarLink}>
                 Foods
-              </Link>
+              </Link> */}
 
               <Link to="/list" className={styles.navBarLink}>
                 Shopping List

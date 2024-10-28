@@ -1,3 +1,15 @@
+.logo {
+  font-family: "Academy Engraved LET", cursive;
+  background: radial-gradient(
+    circle,
+    rgba(232, 95, 92, 1) 0%,
+    rgba(241, 161, 159, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.3s;
+}
+
 .navBar {
   background: linear-gradient(#012a36, #012a36);
   font-family: "Lato", sans-serif;

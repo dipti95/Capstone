@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.cardContents {
+  padding: 15px;
+}
+
+.cardContents button {
+  background-color: #e85f5c;
+  border: none;
+  margin: 15px;
+}
+
+.cardContents button:hover {
+  background-color: #e54946;
+}

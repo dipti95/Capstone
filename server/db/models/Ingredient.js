@@ -1,5 +1,16 @@
 const Sequelize = require("sequelize")
 const db = require("../db")
+const axios = require("axios")
+
+const foodCategories = [
+  "produce",
+  "meat",
+  "dairy",
+  "dry goods",
+  "bakery",
+  "beverages",
+  "miscellaneous",
+]
 
 const Ingredient = db.define("ingredient", {
   name: {
@@ -15,26 +26,14 @@ const Ingredient = db.define("ingredient", {
     defaultValue: "each",
   },
 
-  cost: {
-    type: Sequelize.DECIMAL,
-    defaultValue: 0.0,
-  },
-
   category: {
-    type: Sequelize.ENUM(
-      "produce",
-      "meat",
-      "dairy",
-      "dry goods",
-      "bakery",
-      "beverages",
-      "miscellaneous"
-    ),
+    type: Sequelize.STRING,
+    // type: Sequelize.ENUM(...foodCategories),
     defaultValue: "miscellaneous",
   },
 
   caloriesPerUnit: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     defaultValue: 0,
   },
 
@@ -55,7 +54,8 @@ const Ingredient = db.define("ingredient", {
 
   image: {
     type: Sequelize.STRING,
-    defaultValue: "../../../Images/DummyImageForIngredient.jpg",
+    defaultValue:
+      "https://media.istockphoto.com/photos/fried-pork-and-vegetables-on-white-background-picture-id1190330112?k=20&m=1190330112&s=612x612&w=0&h=_TrmthJupdqYmMU-NC-es85TEvaBJsynDS383hqiAvM=",
   },
 })
 
