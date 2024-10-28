@@ -1,10 +1,10 @@
-const Sequelize = require("sequelize")
-const db = require("../db")
+const Sequelize = require('sequelize');
+const db = require('../db');
 
-const RecipeIngredient = db.define("recipeIngredient", {
+const RecipeIngredient = db.define('recipeIngredient', {
   recipeQty: {
     type: Sequelize.DECIMAL,
   },
-})
+});
 
-module.exports = RecipeIngredient
+module.exports = RecipeIngredient;

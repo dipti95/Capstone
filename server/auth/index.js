@@ -1,4 +1,6 @@
 const router = require("express").Router()
+const Pantry = require("../db/models/Pantry")
+const ShoppingList = require("../db/models/ShoppingList")
 
 const {
   models: { User },
@@ -20,6 +22,13 @@ console.log("AUTH----------------STEP2")
 router.post("/signup", async (req, res, next) => {
   try {
     const user = await User.create(req.body)
+    const defaultPantry = await Pantry.create({ name: "Home" })
+    await defaultPantry.setUser(user)
+    const defaultList = await ShoppingList.create({
+      name: "My Shopping List",
+      status: "open",
+    })
+    await defaultList.setUser(user)
     res.send({ token: await user.generateToken() })
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
@@ -50,6 +59,8 @@ router.put("/me", async (req, res, next) => {
   }
 })
 
+console.log("AUTH----------------LAST")
+
 router.put("/forgot-password", async (req, res, next) => {
   try {
     const { username, newPassword } = req.body
@@ -68,5 +79,3 @@ router.put("/forgot-password", async (req, res, next) => {
     next(error)
   }
 })
-
-console.log("AUTH----------------LAST")

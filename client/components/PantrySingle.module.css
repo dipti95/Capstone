@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.Button {
+  width: 30px;
+}
+
+.qtyButton {
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: #e85f5c;
+  border: none;
+}
+
+.enlarge {
+  font-size: larger;
+  text-align: center;
+}

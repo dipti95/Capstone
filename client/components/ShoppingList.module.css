@@ -1,0 +1,156 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.margin {
+  margin-top: 40px;
+}
+
+.shopNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.list {
+  display: flex;
+  width: 400px;
+}
+
+.addToPantry {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+.enlarge {
+  font-size: larger;
+  text-align: center;
+}
+
+.backToHistory {
+  display: flex;
+  justify-content: flex-end;
+  color: #e85f5c;
+}
+
+.backToHistory:hover {
+  color: #e54946;
+}
+
+.select {
+  text-align: center;
+  height: 40px;
+}
+
+.newPantry {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.removebutton {
+  width: 50px;
+  align-self: center;
+  border-color: #e85f5c;
+  background-color: #e85f5c;
+  color: #f5f5f5;
+}
+
+.removebutton:hover {
+  border-color: #e54946;
+  background-color: #e54946;
+}
+
+.button {
+  align-self: center;
+  background-color: #e85f5c;
+  border: none;
+  margin: 15px;
+}
+
+.button:hover {
+  background-color: #e54946;
+}
+
+.buttonLink {
+  color: #e85f5c;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.buttonLink:hover {
+  color: #e54946;
+}
+
+.sectionHeader {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url(https://envato-shoebox-0.imgix.net/7207/244b-7205-498a-ac42-be724c0cc864/Grilled+meat_1_banner.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1600&s=0733ee80d4d4d56268984666018bd1e5);
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+  color: #f5f5f5;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.sectionTitle {
+  font-size: 62px;
+}
+
+.buttonOutline {
+  border-color: #e85f5c;
+  color: #e85f5c;
+  margin: 5px;
+}
+
+.buttonOutline:hover {
+  border-color: #e54946;
+  background-color: #e54946;
+}
+
+.tableNoIngredients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tableNoIngredients h4 {
+  margin: 15px;
+}
+
+.optionsContainer {
+  margin-top: 30px;
+}
+
+.itemCount {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.addToPantryGroup {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#buttonDiv {
+  padding-top: 19px;
+}
+
+.historyLink {
+  color: #012a36;
+}
+
+.historyLink:hover {
+  color: #e85f5c;
+}

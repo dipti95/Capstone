@@ -9,9 +9,11 @@ const Recipe = db.define("recipe", {
       notEmpty: true,
     },
   },
+
   description: {
     type: Sequelize.TEXT,
   },
+
   rating: {
     type: Sequelize.INTEGER,
     validate: {
@@ -19,44 +21,33 @@ const Recipe = db.define("recipe", {
       max: 5,
     },
   },
+
   caloriesPerRecipe: {
     type: Sequelize.INTEGER,
   },
+
   proteinPerRecipe: {
     type: Sequelize.DECIMAL,
   },
+
   carbsPerRecipe: {
     type: Sequelize.DECIMAL,
   },
+
   fatPerRecipe: {
     type: Sequelize.DECIMAL,
   },
+
   image: {
+    type: Sequelize.TEXT,
+    defaultValue:
+      "https://media.istockphoto.com/photos/fried-pork-and-vegetables-on-white-background-picture-id1190330112?k=20&m=1190330112&s=612x612&w=0&h=_TrmthJupdqYmMU-NC-es85TEvaBJsynDS383hqiAvM=",
+  },
+
+  cuisineType: {
     type: Sequelize.STRING,
   },
-  cuisineType: {
-    type: Sequelize.ENUM(
-      "American",
-      "Asian",
-      "British",
-      "Caribbean",
-      "Central Europe",
-      "Chinese",
-      "Eastern Europe",
-      "French",
-      "Indian",
-      "Italian",
-      "Japanse",
-      "Kosher",
-      "Mediterranean",
-      "Mexican",
-      "Middle Eastern",
-      "Nordic",
-      "South American",
-      "South East Asian",
-      "None"
-    ),
-  },
+
   frequency: {
     type: Sequelize.INTEGER,
     defaultValue: 0,
