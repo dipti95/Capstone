@@ -29,6 +29,7 @@ const PantrySingle = () => {
                 <th className={styles.enlarge}>Item</th>
                 <th className={styles.enlarge}>Category</th>
                 <th className={styles.enlarge}>Quantity</th>
+                <th className={styles.enlarge}>UOM</th>
                 <th className={styles.enlarge}>Remove</th>
               </tr>
             </thead>
@@ -45,6 +46,7 @@ const PantrySingle = () => {
                     <tr className={styles.row} key={item.id}>
                       <td className={styles.enlarge}>{item.name}</td>
                       <td className={styles.enlarge}>{item.category}</td>
+
                       <td className={styles.enlarge}>
                         <Button
                           className={styles.qtyButton}
@@ -66,6 +68,7 @@ const PantrySingle = () => {
                           +
                         </Button>
                       </td>
+                      <th className={styles.enlarge}>{item.uom}</th>
                       <td className={styles.enlarge}>
                         <Button
                           className={styles.qtyButton}
@@ -95,7 +98,9 @@ const PantrySingle = () => {
                 <tr>
                   <th>Item</th>
                   <th>Category</th>
+
                   <th>Quantity</th>
+                  <th>UOM</th>
                   <th>Remove</th>
                 </tr>
               </thead>
