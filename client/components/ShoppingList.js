@@ -88,6 +88,7 @@ const ShoppingList = () => {
                   <tr>
                     <th className={styles.enlarge}>Item</th>
                     <th className={styles.enlarge}>Quantity</th>
+                    <th className={styles.enlarge}>UOM</th>
                     <th className={styles.enlarge}>Remove</th>
                   </tr>
                 </thead>
@@ -104,6 +105,7 @@ const ShoppingList = () => {
                     <tr>
                       <th className={styles.enlarge}>Item</th>
                       <th className={styles.enlarge}>Quantity</th>
+                      <th className={styles.enlarge}>UOM</th>
                       <th className={styles.enlarge}>Remove</th>
                     </tr>
                   </thead>
