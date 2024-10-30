@@ -6,12 +6,41 @@
   font-family: 'Lato', sans-serif;
 }
 
+.headerContainer {
+  background-image: url(https://smartcdn.gprod.postmedia.digital/healthing/wp-content/uploads/2022/06/liver-disease-nutrition-diet-e1654697140439.jpg?quality=90&strip=all&w=2300&h=1292);
+  position: relative;
+  width: 100vw;
+  height: 600px;
+  overflow: hidden;
+  display: flex; /* Ensure the container is a flex container */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
+  background-size: cover; /* Cover the container while preserving aspect ratio */
+  background-position: center;
+}
+
+.welcomeContainer {
+  background: rgb(255, 255, 255, 0.85);
+}
+
 .introduction {
   font-size: 62px;
   font-weight: 800;
-  color: #e85f5c;
+  color: #2aaf5d;
   margin: 20px;
-  text-shadow: 0 0 10px #eb7572;
+  z-index: 2; /* Brings the heading above the image */
+  position: relative; /* Allows z-index to work */
+  text-align: center; /* Center the text */
+}
+
+.tagline {
+  font-size: 24px; /* Adjust as needed */
+  margin: 0; /* Remove default margin for h2 */
+  padding: 0; /* Remove any padding if needed */
+  z-index: 2; /* Brings the tagline above the image */
+  position: relative; /* Allows z-index to work */
+  text-align: center; /* Center the text */
 }
 
 .carousel {
@@ -19,17 +48,24 @@
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: center;
+  display: flex; /* Use flexbox to center buttons */
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center; /* Center buttons vertically */
   margin: 30px;
+  z-index: 2; /* Ensure buttons are above the image */
+  position: relative; /* Allows z-index to work */
+  text-align: center; /* Center the text */
 }
 
 .button {
   background-color: #012a36;
   border: none;
-  margin: 15px;
+  margin: 13px;
   height: 50px;
-  width: 200px;
+  width: 150px;
+  z-index: 2; /* Ensures buttons are above the image */
+  position: relative; /* Allows z-index to work */
+  text-align: center; /* Center the text */
 }
 
 .button:hover {
@@ -61,9 +97,9 @@
 .loginBtn {
   border-color: #012a36;
   color: #012a36;
-  margin: 15px;
+  margin: 13px;
   height: 50px;
-  width: 200px;
+  width: 150px;
 }
 
 .loginBtn:hover {
@@ -72,11 +108,12 @@
 }
 
 hr {
-  width: 35%;
+  width: 65%;
   height: 1px;
   background-color: #012a36;
-  height: 12px;
+  height: 3px;
   margin: 35px;
+  margin-top: 60px;
 }
 
 .guestHomeContainer {

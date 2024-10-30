@@ -14,7 +14,7 @@ const Navbar = () => {
     <Nav fixed="top" className={styles.navBar}>
       <Container>
         <Link to="/">
-          <h1 className={styles.logo}>FOODBUDDY</h1>
+          <h1 className={styles.title}>Food Buddy</h1>
         </Link>
         <nav>
           {isLoggedIn ? (

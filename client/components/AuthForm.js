@@ -41,7 +41,7 @@ const AuthForm = ({ name, displayName }) => {
               placeholder="Enter Password"
             />
           </Form.Group>
-          <Button variant="danger" className={styles.button} type="submit">
+          <Button variant="primary" className={styles.button} type="submit">
             {displayName}
           </Button>
           {name === "login" && (
@@ -51,9 +51,6 @@ const AuthForm = ({ name, displayName }) => {
           )}
           {error && error.response && <div> {error.response.data} </div>}
         </Form>
-      </div>
-      <div className={styles.authPageImgContainer}>
-        <img id={styles.authPageImg} src="/Login.jpg" />
       </div>
     </Container>
   )

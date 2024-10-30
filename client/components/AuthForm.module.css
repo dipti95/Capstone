@@ -1,8 +1,14 @@
 .authFormContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 65px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Places the form above the image */
+  background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+  padding: 30px;
+  width: 30%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .authForm {
@@ -12,28 +18,30 @@
 }
 
 .button {
+  background-color: #012a36 !important;
+  border: none !important;
   margin: 15px;
 }
 
+.button:hover {
+  background-color: #e54946 !important;
+}
+
 .authPageContainer {
-  display: flex;
-  justify-content: center;
-  margin: 150px;
-}
-
-#authPageImg {
-  border-radius: 50%;
-  height: 500px;
-  width: 500px;
-  border: 5px solid red;
-}
-
-.authPageImgContainer {
-  margin-left: 65px;
+  background-image: url(https://smartcdn.gprod.postmedia.digital/healthing/wp-content/uploads/2022/06/liver-disease-nutrition-diet-e1654697140439.jpg?quality=90&strip=all&w=2300&h=1292);
+  position: relative;
+  width: 100vw;
+  height: 600px;
+  overflow: hidden;
+  background-size: cover; /* Ensures the image covers the entire viewport */
+  overflow: hidden;
 }
 
 .formTitle {
   color: #012a36;
   font-family: "Lato", sans-serif;
   font-weight: 700;
+  text-align: center;
 }
+
+

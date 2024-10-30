@@ -125,7 +125,7 @@ const Visuals = () => {
               fontWeight: 100,
               letterSpacing: "1px",
               fontSize: 20,
-              padding: 80,
+              padding: 50,
             },
           }}
         />
