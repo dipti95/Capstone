@@ -49,15 +49,16 @@ let finalData = []
       <VictoryChart
         theme={VictoryTheme.material}
         domainPadding={{ x: 20 }}
-        height={200}
-        width={300}
+        height={500}
+        width={700}
         animate={{ duration: 500 }}
       >
         <VictoryLabel
-          text='frequent items bought'
-          x={225}
+          text='Frequently Bought Items'
+          x={350}
           y={30}
-          textAnchor="end"
+          textAnchor="middle"
+          style={{ fontSize: 25 }}
         />
         <VictoryAxis
           axisLabelComponent={<VictoryLabel />}
@@ -68,15 +69,15 @@ let finalData = []
               textAnchor:"end",
               padding: 2,
               angle: -45,
-              fontSize: 5,
+              fontSize: 10,
             },
             axisLabel: {
               label: 'My Food',
               fontFamily: 'inherit',
               fontWeight: 100,
               letterSpacing: '1px',
-              fontSize: 6,
-              padding: 40,
+              fontSize: 20,
+              padding: 50,
             },
           }}
         />
@@ -92,7 +93,7 @@ let finalData = []
               fontFamily: 'inherit',
               fontWeight: 100,
               letterSpacing: '1px',
-              fontSize: 6,
+              fontSize: 20,
               padding: 30,
             },
           }}

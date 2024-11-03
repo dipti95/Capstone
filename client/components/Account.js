@@ -48,7 +48,7 @@ const Account = () => {
           variant="primary"
           onClick={toggleStatus}
         >
-          Update
+          Edit Account
         </Button>
       </div>
       <div>

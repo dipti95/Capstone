@@ -8,29 +8,36 @@ const HomeGuest = () => {
   return (
     <div>
       <Container className={styles.guestHomeContainer}>
-        <Container className={styles.container}>
-          <h1 className={styles.introduction}>SIMPLIFY YOUR CRAVINGS.</h1>
+        <Container className={styles.headerContainer}>
+          <div className={styles.welcomeContainer}>
+            <Container className={styles.container}>
+              <h1 className={styles.introduction}>Food Buddy</h1>
+            </Container>
+            <Container className={styles.container}>
+            <h2 className={styles.tagline}>Nutritious food and a stocked pantry. Always.</h2>
+            </Container>
+            <div className={styles.buttonContainer}>
+              <Link to="/signup">
+                <Button
+                  className={styles.button}
+                  variant="primary"
+                  style={{ fontSize: "20px" }}
+                >
+                  Sign Up
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button
+                  className={styles.loginBtn}
+                  variant="outline-primary"
+                  style={{ fontSize: "20px" }}
+                >
+                  Login
+                </Button>
+              </Link>
+            </div>
+          </div>
         </Container>
-        <div className={styles.buttonContainer}>
-          <Link to="/signup">
-            <Button
-              className={styles.button}
-              variant="primary"
-              style={{ fontSize: "20px" }}
-            >
-              Sign Up
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button
-              className={styles.loginBtn}
-              variant="outline-primary"
-              style={{ fontSize: "20px" }}
-            >
-              Login
-            </Button>
-          </Link>
-        </div>
         <hr />
         <h2 style={{ margin: "25px", fontSize: "42px" }}>
           Take control of your kitchen life.

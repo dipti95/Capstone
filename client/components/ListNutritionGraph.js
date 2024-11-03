@@ -66,12 +66,12 @@ const listNutritionGraph = () => {
     <div style={{ height: "650px" }}>
       <VictoryChart
         domainPadding={{ x: 20 }}
-        height={400}
-        width={600}
+        height={500}
+        width={700}
         animate={{ duration: 500 }}
       >
         <VictoryLegend
-          x={410}
+          x={600}
           y={60}
           title="Legend"
           centerTitle
@@ -86,8 +86,8 @@ const listNutritionGraph = () => {
         />
         <VictoryLabel
           text="Nutrition of Shopping Lists"
-          x={300}
-          y={40}
+          x={350}
+          y={30}
           textAnchor="middle"
           style={{ fontSize: 25 }}
         />
@@ -98,7 +98,7 @@ const listNutritionGraph = () => {
           style={{
             tickLabels: {
               angle: -45,
-              fontSize: 8,
+              fontSize: 10,
               textAnchor: "end",
               padding: 2,
             },
@@ -107,20 +107,20 @@ const listNutritionGraph = () => {
               fontFamily: "inherit",
               fontWeight: 100,
               letterSpacing: "1px",
-              fontSize: 18,
-              padding: 70,
+              fontSize: 20,
+              padding: 50,
             },
           }}
         />
         <VictoryAxis
           dependentAxis
           axisLabelComponent={<VictoryLabel />}
-          label={"grams"}
+          label={"Grams"}
           tickFormat={(t) => (Number.isInteger(t) ? t : null)}
           style={{
             tickLabels: { fontSize: 10 },
             axisLabel: {
-              label: "grams",
+              label: "Grams",
               fontFamily: "inherit",
               fontWeight: 100,
               letterSpacing: "1px",

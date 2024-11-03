@@ -24,7 +24,7 @@ const Home = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.sectionHeader}>
-        <h1 className={styles.sectionTitle}>Overview</h1>
+        <h1 className={styles.sectionTitle}>Dashboard</h1>
       </div>
       <div className={styles.charts}>
         <Card className={styles.chartCard}>
