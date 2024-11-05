@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getFoods } from "../store/foods"
 import SingleFood from "./SingleFood"
-import NewFood from "./NewFood"
+
 import styles from "./Food.module.css"
 import { Container, Form, Button } from "react-bootstrap"
 
