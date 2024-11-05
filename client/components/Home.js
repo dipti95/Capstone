@@ -4,6 +4,7 @@ import { fetchAllPantries } from "../store/pantries"
 import Visuals from "./Visuals"
 import Visual2 from "./Visual2"
 import ListNutritionGraph from "./ListNutritionGraph"
+import VisualNutrition from "./VisualNutrition"
 import styles from "./Home.module.css"
 import { Card } from "react-bootstrap"
 
@@ -27,6 +28,11 @@ const Home = (props) => {
         <h1 className={styles.sectionTitle}>Dashboard</h1>
       </div>
       <div className={styles.charts}>
+        <Card className={styles.chartCard}>
+          <Card.Body>
+            <VisualNutrition />
+          </Card.Body>
+        </Card>
         <Card className={styles.chartCard}>
           <Card.Body>
             <Visuals />

@@ -36,51 +36,51 @@ async function seed() {
     name: "adminPantry",
   })
 
-  // Creating Ingredient
-  const [carrot, chicken, wine, mochi] = await Promise.all([
-    Ingredient.create({
-      name: "carrot",
-      uom: "lb",
-      cost: 4.5,
-      type: "produce",
-      caloriesPerUnit: 200,
-      proteinPerUnit: 0,
-      carbsPerUnit: 21,
-      fatsPerUnit: 200,
-    }),
-    Ingredient.create({
-      name: "chicken",
-      uom: "oz",
-      cost: 2.25,
-      type: "meat",
-      caloriesPerUnit: 50,
-      proteinPerUnit: 50,
-      carbsPerUnit: 0,
-      fatsPerUnit: 3000,
-    }),
-    Ingredient.create({
-      name: "wine",
-      uom: "fl-oz.",
-      cost: 14.5,
-      type: "beverage",
-      caloriesPerUnit: 3000,
-      proteinPerUnit: 4000,
-      carbsPerUnit: 22,
-      fatsPerUnit: 0,
-    }),
-    Ingredient.create({
-      name: "mochi",
-      uom: "oz",
-      cost: 12.5,
-      type: "produce",
-      caloriesPerUnit: 500,
-      proteinPerUnit: 20,
-      carbsPerUnit: 0,
-      fatsPerUnit: 900,
-    }),
-  ])
+  // // Creating Ingredient
+  // const [carrot, chicken, wine, mochi] = await Promise.all([
+  //   Ingredient.create({
+  //     name: "carrot",
+  //     uom: "lb",
+  //     cost: 4.5,
+  //     type: "produce",
+  //     caloriesPerUnit: 200,
+  //     proteinPerUnit: 0,
+  //     carbsPerUnit: 21,
+  //     fatsPerUnit: 200,
+  //   }),
+  //   Ingredient.create({
+  //     name: "chicken",
+  //     uom: "oz",
+  //     cost: 2.25,
+  //     type: "meat",
+  //     caloriesPerUnit: 50,
+  //     proteinPerUnit: 50,
+  //     carbsPerUnit: 0,
+  //     fatsPerUnit: 3000,
+  //   }),
+  //   Ingredient.create({
+  //     name: "wine",
+  //     uom: "fl-oz.",
+  //     cost: 14.5,
+  //     type: "beverage",
+  //     caloriesPerUnit: 3000,
+  //     proteinPerUnit: 4000,
+  //     carbsPerUnit: 22,
+  //     fatsPerUnit: 0,
+  //   }),
+  //   Ingredient.create({
+  //     name: "mochi",
+  //     uom: "oz",
+  //     cost: 12.5,
+  //     type: "produce",
+  //     caloriesPerUnit: 500,
+  //     proteinPerUnit: 20,
+  //     carbsPerUnit: 0,
+  //     fatsPerUnit: 900,
+  //   }),
+  // ])
 
-  await pantry.addIngredient(carrot, { pantryQty: 3 })
+  // await pantry.addIngredient(carrot, { pantryQty: 3 })
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
