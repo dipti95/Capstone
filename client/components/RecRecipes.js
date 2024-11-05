@@ -144,49 +144,44 @@ const RecRecipes = () => {
 
   return (
     <Carousel responsive={responsive} arrows showDots={false}>
-      {recRecipes.map(
-        (recipe) => (
-          console.log(recipe.id + "From RecRecipes.js----------------------"),
-          (
-            <Card
-              key={recipe.id}
-              className={
-                recipe.id === currentView
-                  ? styles.expandedCard
-                  : styles.recRecipeCard
-              }
+      {recRecipes.map((recipe) => (
+        <Card
+          key={recipe.id}
+          className={
+            recipe.id === currentView
+              ? styles.expandedCard
+              : styles.recRecipeCard
+          }
+        >
+          <Card.Img
+            variant="top"
+            className={styles.recipeImg}
+            src={recipe.image}
+          />
+          <Card.Body>
+            <Card.Title>
+              {recipe.id === currentView
+                ? recipe.name
+                : recipe.name.slice(0, 20)}
+              {recipe.id !== currentView && recipe.name.length > 20
+                ? "..."
+                : ""}
+            </Card.Title>
+            <Link to={`/recipes/recommended/${recipe.id}`}>
+              <Button variant="primary" className={styles.button}>
+                View
+              </Button>
+            </Link>
+            <Button
+              variant="outline-primary"
+              className={styles.buttonOutline}
+              onClick={() => addToMyRecipes(recipe.id)}
             >
-              <Card.Img
-                variant="top"
-                className={styles.recipeImg}
-                src={recipe.image}
-              />
-              <Card.Body>
-                <Card.Title>
-                  {recipe.id === currentView
-                    ? recipe.name
-                    : recipe.name.slice(0, 20)}
-                  {recipe.id !== currentView && recipe.name.length > 20
-                    ? "..."
-                    : ""}
-                </Card.Title>
-                <Link to={`/recipes/recommended/${recipe.id}`}>
-                  <Button variant="primary" className={styles.button}>
-                    View
-                  </Button>
-                </Link>
-                <Button
-                  variant="outline-primary"
-                  className={styles.buttonOutline}
-                  onClick={() => addToMyRecipes(recipe.id)}
-                >
-                  Add to My Recipes
-                </Button>
-              </Card.Body>
-            </Card>
-          )
-        )
-      )}
+              Add to My Recipes
+            </Button>
+          </Card.Body>
+        </Card>
+      ))}
     </Carousel>
   )
 }

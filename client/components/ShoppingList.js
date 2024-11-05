@@ -62,8 +62,6 @@ const ShoppingList = () => {
     }
   }
 
-  console.log("Ingredients: ", ingredients)
-
   return (
     <div>
       <div className={styles.sectionHeader}>

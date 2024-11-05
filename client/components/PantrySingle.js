@@ -13,8 +13,6 @@ const PantrySingle = () => {
   const { ingredients } = pantry
   let currentPantry = pantry.id
 
-  console.log("pantry: ", pantry)
-
   async function handleChange(itemId, userId, quantity) {
     dispatch(editPantryThunk(itemId, userId, quantity, currentPantry))
   }

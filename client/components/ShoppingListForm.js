@@ -20,31 +20,28 @@ const ShoppingListForm = ({ props }) => {
   }
 
   return (
-    console.log(props),
-    (
-      <>
-        <tr>
-          <td className={styles.enlarge}>{props.name} </td>
-          <td>
-            <Form.Control
-              type="text"
-              name="quantity"
-              value={newQuantity}
-              onChange={(e) => handleQuantityChange(e)}
-            />
-          </td>
-          <td className={styles.enlarge}>{props.uom} </td>
-          <td className={styles.enlarge}>
-            <Button
-              className={styles.removebutton}
-              onClick={() => handleRemoveItem()}
-            >
-              x
-            </Button>
-          </td>
-        </tr>
-      </>
-    )
+    <>
+      <tr>
+        <td className={styles.enlarge}>{props.name} </td>
+        <td>
+          <Form.Control
+            type="text"
+            name="quantity"
+            value={newQuantity}
+            onChange={(e) => handleQuantityChange(e)}
+          />
+        </td>
+        <td className={styles.enlarge}>{props.uom} </td>
+        <td className={styles.enlarge}>
+          <Button
+            className={styles.removebutton}
+            onClick={() => handleRemoveItem()}
+          >
+            x
+          </Button>
+        </td>
+      </tr>
+    </>
   )
 }
 
