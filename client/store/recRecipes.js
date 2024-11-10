@@ -69,7 +69,6 @@ export const addRecRecipe = (recRecipe) => {
 }
 
 export const getNewRecRecipes = (apiParams) => {
-  console.log("redux store----------- fetching the data from external api")
   return async (dispatch) => {
     try {
       const token = localStorage.getItem(TOKEN)

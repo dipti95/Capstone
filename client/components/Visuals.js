@@ -36,7 +36,7 @@ const Visuals = () => {
     }
   })
 
-  console.log("Here's state", pantries)
+  //console.log("Here's state", pantries)
 
   const selectPantry = (pantries, pantryName) => {
     const selectedPantry = pantries.filter(

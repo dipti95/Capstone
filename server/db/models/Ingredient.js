@@ -102,7 +102,6 @@ Ingredient.beforeCreate(async (food, options) => {
         }
       } catch (error) {
         console.error("Error fetching data from API:", error)
-        // Optionally, handle the error or set default values
       }
     }
   }

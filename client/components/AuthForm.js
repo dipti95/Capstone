@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { authenticate } from "../store"
+import { authenticateLogin, authenticateSignup } from "../store"
 import styles from "./AuthForm.module.css"
 import { Form, Button, Container } from "react-bootstrap"
 import { Link } from "react-router-dom"
@@ -17,7 +17,13 @@ const AuthForm = ({ name, displayName }) => {
     const formName = evt.target.name
     const username = evt.target.username.value
     const password = evt.target.password.value
-    dispatch(authenticate(username, password, formName))
+
+    if (formName === "login") {
+      dispatch(authenticateLogin(username, password))
+    } else {
+      const email = evt.target.email.value
+      dispatch(authenticateSignup(username, email, password))
+    }
   }
 
   return (
@@ -33,6 +39,16 @@ const AuthForm = ({ name, displayName }) => {
               placeholder="Enter username"
             />
           </Form.Group>
+          {name === "signup" && (
+            <Form.Group>
+              <Form.Label htmlFor="email">Email</Form.Label>
+              <Form.Control
+                name="email"
+                type="email"
+                placeholder="Enter Email"
+              />
+            </Form.Group>
+          )}
           <Form.Group>
             <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control
@@ -41,6 +57,7 @@ const AuthForm = ({ name, displayName }) => {
               placeholder="Enter Password"
             />
           </Form.Group>
+
           <Button variant="primary" className={styles.button} type="submit">
             {displayName}
           </Button>

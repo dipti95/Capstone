@@ -1,13 +1,10 @@
 require("dotenv").config()
 const { db } = require("./db")
 const PORT = process.env.PORT || 8080
-console.log(PORT)
+
 const app = require("./app")
 
-console.log(PORT)
 const seed = require("../script/seed")
-
-console.log(PORT)
 
 const init = async () => {
   try {

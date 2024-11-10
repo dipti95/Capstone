@@ -28,16 +28,45 @@ export const me = () => async (dispatch) => {
   }
 }
 
-export const authenticate =
-  (username, password, method) => async (dispatch) => {
+export const authenticateLogin = (username, password) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/auth/login`, { username, password })
+
+    window.localStorage.setItem(TOKEN, res.data.token)
+
+    history.push("/otp", { username })
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }))
+  }
+}
+
+export const authenticateSignup =
+  (username, email, password) => async (dispatch) => {
     try {
-      const res = await axios.post(`/auth/${method}`, { username, password })
+      const res = await axios.post(`/auth/signup`, {
+        username,
+
+        email,
+        password,
+      })
+
       window.localStorage.setItem(TOKEN, res.data.token)
+
       dispatch(me())
+      history.push("/account")
     } catch (authError) {
       return dispatch(setAuth({ error: authError }))
     }
   }
+export const authenticateotp = (otp, username) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/auth/otp`, { otp, username })
+    window.localStorage.setItem(TOKEN, res.data.token)
+    dispatch(me())
+  } catch (authError) {
+    return dispatch(setAuth({ error: authError }))
+  }
+}
 
 export const update = (newAccount) => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN)
@@ -48,7 +77,9 @@ export const update = (newAccount) => async (dispatch) => {
       },
       newAccount,
     })
+
     dispatch(setAuth(res.data))
+    history.push("/recipes")
   }
 }
 
@@ -82,6 +113,7 @@ export default function (state = {}, action) {
   switch (action.type) {
     case SET_AUTH:
       return action.auth
+
     default:
       return state
   }
