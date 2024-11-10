@@ -1,6 +1,6 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { authenticate, authenticateLogin, authenticateSignup } from "../store"
+import { authenticateLogin, authenticateSignup } from "../store"
 import styles from "./AuthForm.module.css"
 import { Form, Button, Container } from "react-bootstrap"
 import { Link } from "react-router-dom"
