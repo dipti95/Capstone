@@ -4,23 +4,15 @@ const morgan = require("morgan")
 const app = express()
 module.exports = app
 
-console.log("STEP1")
-
 // logging middleware
 app.use(morgan("dev"))
-
-console.log("STEP2")
 
 // body parsing middleware
 app.use(express.json())
 
-console.log("STEP3")
-
 // auth and api routes
 app.use("/auth", require("./auth"))
 app.use("/api", require("./api"))
-
-console.log("STEP4")
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "..", "public/index.html"))

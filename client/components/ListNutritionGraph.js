@@ -25,7 +25,6 @@ const listNutritionGraph = () => {
   let shoppingHistoryData = shoppingHistory || []
   useEffect(() => {
     function groupShoppingHistoryNutrition(shoppingHistoryData) {
-      //listNutrition = {[date]: [calories,fats,protein,carbs]}
       const listNutrition = {}
       shoppingHistoryData.map((list) => {
         const date =
@@ -39,7 +38,7 @@ const listNutritionGraph = () => {
           listNutrition[date][2] += Number(ingredient.carbsPerUnit)
         })
       })
-      console.log("listNutrition: ", listNutrition)
+
       const nutritionCategories = [
         "fatsPerUnit",
         "proteinPerUnit",

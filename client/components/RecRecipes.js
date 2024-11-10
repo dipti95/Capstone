@@ -46,7 +46,6 @@ const RecRecipes = () => {
 
     if (didMount.current) {
       if (recRecipes.length < 5) {
-        console.log("recRecipes.length: ", recRecipes.length)
         getMoreRecs()
       } else if (
         recRecipes.length &&

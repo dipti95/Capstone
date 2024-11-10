@@ -120,8 +120,6 @@ User.authenticate = async function ({ username, password }) {
 User.verifyOTP = async function ({ otp, username }) {
   const user = await this.findOne({ where: { username } })
 
-  console.log(user.otp)
-  console.log(user)
   if (!user) {
     const error = Error("User not found")
     error.status = 404
