@@ -7,8 +7,6 @@ const {
 } = require("../db")
 module.exports = router
 
-console.log("AUTH----------------STEP1")
-
 router.post("/login", async (req, res, next) => {
   try {
     res.send({ token: await User.authenticate(req.body) })
@@ -17,7 +15,13 @@ router.post("/login", async (req, res, next) => {
   }
 })
 
-console.log("AUTH----------------STEP2")
+router.post("/otp", async (req, res, next) => {
+  try {
+    res.send({ token: await User.verifyOTP(req.body) })
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.post("/signup", async (req, res, next) => {
   try {
@@ -39,8 +43,6 @@ router.post("/signup", async (req, res, next) => {
   }
 })
 
-console.log("AUTH----------------STEP3")
-
 router.get("/me", async (req, res, next) => {
   try {
     res.send(await User.findByToken(req.headers.authorization))
@@ -58,8 +60,6 @@ router.put("/me", async (req, res, next) => {
     next(error)
   }
 })
-
-console.log("AUTH----------------LAST")
 
 router.put("/forgot-password", async (req, res, next) => {
   try {

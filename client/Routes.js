@@ -20,6 +20,7 @@ import AddRecipe from "./components/AddRecipe"
 import NewPantryItem from "./components/NewPantryItem"
 import HomeGuest from "./components/HomeGuest"
 import PantryRefactor from "./components/PantryRefactor"
+import OTPForm from "./components/OtpAuth"
 
 /**
  * COMPONENT
@@ -38,6 +39,7 @@ const Routes = () => {
       {isLoggedIn ? (
         <Switch>
           <Route path="/account" component={Account} />
+
           <Route exact path="/list" component={ShoppingList} />
           <Route
             exact
@@ -73,6 +75,7 @@ const Routes = () => {
           <Route path="/login">{Login}</Route>
           <Route path="/signup">{Signup}</Route>
           <Route path="/forgot-password" component={ForgotPasswordForm} />
+          <Route path="/otp" component={OTPForm} />
         </Switch>
       )}
     </div>

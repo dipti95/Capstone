@@ -30,7 +30,6 @@ router.get("/", authenticateToken, async (req, res, next) => {
 // GET /api/recipes/recs?cuisinePref=STRING
 router.get("/recs", authenticateToken, async (req, res, next) => {
   try {
-    // At this stage, we're just getting all the recipes not assigned to any user. With the api, this route will be entirely replaced.
     let recRecipes = await Recipe.findAll({
       where: { userId: { [Op.is]: null } },
       include: Ingredient,
@@ -133,8 +132,6 @@ router.post("/", authenticateToken, async (req, res, next) => {
 //POST api/recipes/recs
 router.post("/recs", authenticateToken, async (req, res, next) => {
   try {
-    console.log("inside /recs")
-    console.log("---------Post Route Api/recipes/recs------------")
     const {
       name,
       description,
@@ -194,14 +191,13 @@ router.post("/recs", authenticateToken, async (req, res, next) => {
 
 router.post("/recs/new", authenticateToken, async (req, res, next) => {
   try {
-    console.log("inside /recs/new")
     let apiRequest = `https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=${process.env.REACT_APP_RECIPE_APP_ID}&app_key=${process.env.REACT_APP_RECIPE_KEY}&mealType=Dinner`
 
     const { apiParams } = req.body
     apiRequest += apiParams
     const apiResponse = await axios.get(encodeURI(apiRequest))
     const hits = apiResponse.data.hits
-    console.log("api hits: ", hits)
+
     if (hits) {
       res.send(hits)
     }
@@ -212,16 +208,9 @@ router.post("/recs/new", authenticateToken, async (req, res, next) => {
 
 // PUT /api/recipes/recs/:id?userId=INT
 router.put("/recs/:id", async (req, res, next) => {
-  console.log("-----------PUT BEFORE TRY---------")
   try {
-    console.log("-----------PUT AFTER TRY---------")
-
-    //console.log(req.params.id)
     const recRecipeId = req.params.id
     const { userId } = req.query
-    //console.log(req.params.id)
-
-    //console.log(userId)
 
     const recRecipe = await Recipe.findByPk(recRecipeId, {
       include: Ingredient,
@@ -266,9 +255,7 @@ router.put("/recs/:id", async (req, res, next) => {
 
 // PUT /api/recipes/:id
 router.put("/:id", authenticateToken, async (req, res, next) => {
-  console.log("-----------sECONF PUT BEFORE TRY---------")
   try {
-    console.log("-----------PUT AFTER TRY---------")
     const recipe = await Recipe.findByPk(req.params.id)
 
     if (!recipe) {
@@ -329,7 +316,6 @@ router.put("/:id", authenticateToken, async (req, res, next) => {
 // DELETE /api/recipe/:id
 router.delete("/:id", authenticateToken, async (req, res, next) => {
   try {
-    console.log("---------DELETE Route------------")
     const recipe = await Recipe.findByPk(req.params.id)
 
     if (!recipe) {

@@ -3,6 +3,8 @@ const db = require("../db")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
+const nodemailer = require("nodemailer")
+
 const SALT_ROUNDS = 5
 
 const User = db.define("user", {
@@ -43,6 +45,13 @@ const User = db.define("user", {
     ),
   },
 
+  otp: {
+    type: Sequelize.STRING,
+  },
+  otpExpiration: {
+    type: Sequelize.DATE,
+  },
+
   diet: {
     type: Sequelize.STRING,
     defaultValue: "",
@@ -56,22 +65,22 @@ const User = db.define("user", {
 
 module.exports = User
 
+const transporter = nodemailer.createTransport({
+  host: "mail.gmx.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+})
+
 User.prototype.correctPassword = function (candidatePwd) {
   return bcrypt.compare(candidatePwd, this.password)
 }
 
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT)
-}
-
-User.authenticate = async function ({ username, password }) {
-  const user = await this.findOne({ where: { username } })
-  if (!user || !(await user.correctPassword(password))) {
-    const error = Error("Incorrect username/password")
-    error.status = 401
-    throw error
-  }
-  return user.generateToken()
 }
 
 User.findByToken = async function (token) {
@@ -87,6 +96,58 @@ User.findByToken = async function (token) {
     error.status = 401
     throw error
   }
+}
+
+User.authenticate = async function ({ username, password }) {
+  const user = await this.findOne({ where: { username } })
+  if (!user || !(await user.correctPassword(password))) {
+    const error = Error("Incorrect username/password")
+    error.status = 401
+    throw error
+  }
+
+  const otp = Math.floor(100000 + Math.random() * 900000).toString()
+
+  const otpExpiration = new Date(Date.now() + 5 * 60000)
+
+  await user.update({ otp, otpExpiration })
+
+  await sendOTPEmail(user.email, otp)
+
+  return { message: "OTP sent to your email", userId: user.id }
+}
+
+User.verifyOTP = async function ({ otp, username }) {
+  const user = await this.findOne({ where: { username } })
+
+  console.log(user.otp)
+  console.log(user)
+  if (!user) {
+    const error = Error("User not found")
+    error.status = 404
+    throw error
+  }
+
+  if (user.otp !== otp || new Date() > user.otpExpiration) {
+    const error = Error("Invalid or expired OTP")
+    error.status = 401
+    throw error
+  }
+
+  await user.update({ otp: null, otpExpiration: null })
+
+  return user.generateToken()
+}
+
+async function sendOTPEmail(toEmail, otp) {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: toEmail,
+    subject: "Your OTP Code",
+    text: `Your OTP code is ${otp}. It will expire in 5 minutes.`,
+  }
+
+  await transporter.sendMail(mailOptions)
 }
 
 const hashPassword = async (user) => {

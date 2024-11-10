@@ -70,6 +70,9 @@ const Navbar = () => {
         <nav>
           {isLoggedIn ? (
             <Container className={styles.signedInLinks}>
+              <Link to="/" className={styles.navBarLink}>
+                Dashboard
+              </Link>
               <Link to="/foods" className={styles.navBarLink}>
                 Foods
               </Link>
