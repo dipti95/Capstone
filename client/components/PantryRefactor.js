@@ -4,7 +4,6 @@ import { fetchAllPantries } from "../store/pantries"
 import { fetchSinglePantry } from "../store/pantry"
 import styles from "./PantryRefactor.module.css"
 import PantrySingle from "./PantrySingle"
-import NewPantryItem from "./NewPantryItem"
 import PantryCreate from "./PantryCreate"
 import { Form, Container, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
@@ -13,27 +12,55 @@ const PantryRefactor = () => {
   const { id } = useSelector((state) => state.auth)
   const { pantries } = useSelector((state) => state)
   const pantry = useSelector((state) => state.pantry)
-  const [selectedPantry, setSelectedPantry] = useState(pantry ? pantry.id : 0)
-  const { ingredients } = pantry || []
-  const [hidden, setHidden] = useState(true)
+  const [selectedPantry, setSelectedPantry] = useState(pantry?.id || 0)
+  const [sortBy, setSortBy] = useState("name")
+  const [sortedIngredients, setSortedIngredients] = useState([])
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(fetchAllPantries(id))
-    dispatch(fetchSinglePantry(pantry.id))
-  }, [])
+  const [showCreateForm, setShowCreateForm] = useState(false)
 
   useEffect(() => {
-    if (!Object.keys(pantry).length && pantries.length) {
-      const homePantry = pantries.filter((pantry) => pantry.name === "Home")[0]
-      dispatch(fetchSinglePantry(homePantry.id))
+    if (id) {
+      dispatch(fetchAllPantries(id))
     }
-  }, [pantries])
+  }, [id, dispatch])
+
+  useEffect(() => {
+    if (selectedPantry) {
+      dispatch(fetchSinglePantry(selectedPantry))
+    }
+  }, [selectedPantry, dispatch])
+
+  useEffect(() => {
+    if (pantry && pantry.ingredients) {
+      const sorted = [...pantry.ingredients].sort((a, b) => {
+        if (sortBy === "name") {
+          return a?.name?.toLowerCase().localeCompare(b?.name?.toLowerCase())
+        } else if (sortBy === "quantity") {
+          return (
+            (a?.pantryIngredient?.pantryQty || 0) -
+            (b?.pantryIngredient?.pantryQty || 0)
+          )
+        } else if (sortBy === "category") {
+          return a?.category
+            ?.toLowerCase()
+            .localeCompare(b?.category?.toLowerCase())
+        }
+        return 0
+      })
+      setSortedIngredients(sorted)
+    }
+  }, [pantry, sortBy])
 
   const handlePantryChange = (e) => {
-    setSelectedPantry(e)
-    dispatch(fetchSinglePantry(e))
+    const pantryId = e.target.value
+    setSelectedPantry(pantryId)
+    dispatch(fetchSinglePantry(pantryId))
+  }
+
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value)
   }
 
   return (
@@ -49,33 +76,26 @@ const PantryRefactor = () => {
                 Add Items
               </Button>
             </Link>
-            {hidden ? (
+
+            {!showCreateForm ? (
               <Button
-                className={styles.buttonOutline}
                 variant="outline-primary"
-                onClick={() => setHidden(false)}
+                className={styles.buttonOutline}
+                onClick={() => setShowCreateForm(true)}
               >
                 Create New Pantry
               </Button>
             ) : (
-              <div style={{ display: "inline" }}>
-                <PantryCreate />
-                <Button
-                  className={styles.buttonLink}
-                  variant="link"
-                  onClick={() => setHidden(true)}
-                >
-                  Hide
-                </Button>
-              </div>
+              <PantryCreate onHide={() => setShowCreateForm(false)} />
             )}
           </div>
+
           <div className={styles.pantryFilterBox}>
             <div>
               <Form.Label className={styles.label}>Select Pantry</Form.Label>
               <Form.Select
                 name="pantries"
-                onChange={(e) => handlePantryChange(e.target.value)}
+                onChange={handlePantryChange}
                 value={selectedPantry}
               >
                 {pantries.map((pantry) => (
@@ -85,10 +105,24 @@ const PantryRefactor = () => {
                 ))}
               </Form.Select>
             </div>
+            <div className={styles.dropdownSpacer}></div>
+            <div>
+              <Form.Label className={styles.label}>Sort By</Form.Label>
+              <Form.Select value={sortBy} onChange={handleSortChange}>
+                <option value="name">Name</option>
+                <option value="quantity">Quantity</option>
+                <option value="category">Category</option>
+              </Form.Select>
+            </div>
           </div>
         </div>
       </Container>
-      {Object.keys(pantry) ? <PantrySingle /> : <div>Nothing here.</div>}
+
+      {selectedPantry && Object.keys(pantry).length ? (
+        <PantrySingle ingredients={sortedIngredients} />
+      ) : (
+        <div>Nothing here.</div>
+      )}
     </div>
   )
 }
