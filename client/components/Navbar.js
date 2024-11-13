@@ -96,8 +96,8 @@ const Navbar = () => {
                 title={<FaUserCircle size={25} />}
                 id={styles.navdropdown}
               >
-                <NavDropdown.Item href="/account">Account</NavDropdown.Item>
-                <NavDropdown.Item href="#" onClick={() => dispatch(logout())}>
+                <NavDropdown.Item href="/account" className={styles.navDropdownItem}>Account</NavDropdown.Item>
+                <NavDropdown.Item href="#" className={styles.navDropdownItem} onClick={() => dispatch(logout())}>
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
