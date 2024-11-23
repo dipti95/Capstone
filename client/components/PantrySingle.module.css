@@ -19,3 +19,17 @@
   font-size: larger;
   text-align: center;
 }
+
+.listItem {
+  font-size: medium;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.removebutton {
+  width: 40px;
+  align-self: center;
+  border-color: #e85f5c;
+  background-color: #e85f5c;
+  color: #f5f5f5;
+}

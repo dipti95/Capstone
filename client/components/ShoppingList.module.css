@@ -58,7 +58,7 @@
 }
 
 .removebutton {
-  width: 50px;
+  width: 40px;
   align-self: center;
   border-color: #e85f5c;
   background-color: #e85f5c;
@@ -153,4 +153,23 @@
 
 .historyLink:hover {
   color: #e85f5c;
+}
+
+.listItem {
+  font-size: medium;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.listQuantity {
+  font-size: medium;
+  vertical-align: middle;
+  text-align: center;
+  width: 100px;
+}
+
+.listQuantityCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

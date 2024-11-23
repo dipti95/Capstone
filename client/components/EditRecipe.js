@@ -232,7 +232,7 @@ const EditRecipe = () => {
                     </Form.Group>
 
                     <Form.Group>
-                      <Form.Label htmlFor="uom">UOM</Form.Label>
+                      <Form.Label htmlFor="uom">Unit of Measure</Form.Label>
                       <Form.Control
                         type="text"
                         name="uom"

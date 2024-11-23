@@ -27,7 +27,7 @@ const PantrySingle = () => {
                 <th className={styles.enlarge}>Item</th>
                 <th className={styles.enlarge}>Category</th>
                 <th className={styles.enlarge}>Quantity</th>
-                <th className={styles.enlarge}>UOM</th>
+                <th className={styles.enlarge}>Unit of Measure</th>
                 <th className={styles.enlarge}>Remove</th>
               </tr>
             </thead>
@@ -42,10 +42,10 @@ const PantrySingle = () => {
                   const quantity = item.pantryIngredient.pantryQty
                   return (
                     <tr className={styles.row} key={item.id}>
-                      <td className={styles.enlarge}>{item.name}</td>
-                      <td className={styles.enlarge}>{item.category}</td>
+                      <td className={styles.listItem}>{item.name}</td>
+                      <td className={styles.listItem}>{item.category}</td>
 
-                      <td className={styles.enlarge}>
+                      <td className={styles.listItem}>
                         <Button
                           className={styles.qtyButton}
                           variant="primary"
@@ -66,10 +66,10 @@ const PantrySingle = () => {
                           +
                         </Button>
                       </td>
-                      <th className={styles.enlarge}>{item.uom}</th>
+                      <td className={styles.listItem}>{item.uom}</td>
                       <td className={styles.enlarge}>
                         <Button
-                          className={styles.qtyButton}
+                          className={styles.removebutton}
                           variant="primary"
                           type="button"
                           onClick={() => handleChange(item.id, id, 0)}
@@ -98,7 +98,7 @@ const PantrySingle = () => {
                   <th>Category</th>
 
                   <th>Quantity</th>
-                  <th>UOM</th>
+                  <th>Unit of Measure</th>
                   <th>Remove</th>
                 </tr>
               </thead>

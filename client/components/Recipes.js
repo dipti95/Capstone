@@ -59,7 +59,7 @@ const Recipes = () => {
         <Container className={styles.addRecipeBtnContainer}>
           <Link to="/recipes/add">
             <Button variant="primary" className={styles.button}>
-              Add Recipe
+              Create Recipe
             </Button>
           </Link>
         </Container>

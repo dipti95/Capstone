@@ -80,6 +80,7 @@ const Visuals = () => {
   const categoricalData = groupByCategory(data)
 
   return (
+    <div style={{ height: '550px' }}>
     <>
       <select name="pantries" onChange={(e) => handlePantryChange(e)}>
         <option value="View All Pantries">View All Pantries</option>
@@ -104,7 +105,7 @@ const Visuals = () => {
               : `Quantities of Foods in Your ${selectedPantry} Pantry`
           }
           x={350}
-          y={30}
+          y={-10}
           textAnchor="middle"
           style={{ fontSize: 25 }}
         />
@@ -135,25 +136,29 @@ const Visuals = () => {
           label={"Quantity"}
           tickFormat={(t) => (Number.isInteger(t) ? t : null)}
           style={{
-            tickLabels: { fontSize: 5 },
+            tickLabels: { fontSize: 10 },
             axisLabel: {
               label: "Quantity",
               fontFamily: "inherit",
               fontWeight: 100,
               letterSpacing: "1px",
               fontSize: 20,
-              padding: 30,
+              padding: 32,
             },
           }}
         />
         <VictoryBar
           barWidth={({ index }) => index * 2 + 12}
           data={categoricalData}
+          style={{
+            data: {fill: "#2c5f34"}}
+          }
           x="category"
           y="quantity"
         />
       </VictoryChart>
     </>
+    </div>
   )
 }
 

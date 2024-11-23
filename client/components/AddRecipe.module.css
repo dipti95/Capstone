@@ -31,10 +31,11 @@
 }
 
 .addRecipeImg {
-  height: 250px; /* Set the height to 250px */
+ /* height: 350px; */
+  height: 250px; /* Set the height to 350px */
   width: 100%; /* Ensure the image takes up the full width */
   object-fit: cover; /* Ensure the image scales without stretching */
-  object-position: top; /* Align the image to the top */
+  object-position: middle; /* Align the image to the top */
 }
 
 .recipeInfo {

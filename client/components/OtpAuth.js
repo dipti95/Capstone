@@ -23,13 +23,13 @@ const OTPForm = () => {
     <Container className={styles.authPageContainer}>
       <div className={styles.authFormContainer}>
         <Form className={styles.authForm} onSubmit={handleSubmit}>
-          <h1 className={styles.formTitle}>OTP</h1>
+          <h1 className={styles.formTitle}>Two-Factor Authentication</h1>
           <Form.Group>
-            <Form.Label htmlFor="otp">OTP</Form.Label>
+            <Form.Label htmlFor="otp">A code has been sent to your email</Form.Label>
             <Form.Control
               name="otp"
               type="text"
-              placeholder="Enter your otp"
+              placeholder="Enter security code"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               required

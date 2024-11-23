@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { Route, Switch, Redirect } from "react-router-dom"
+import { useSelector, useDispatch} from "react-redux"
+import { Route, Switch, Redirect, useLocation } from "react-router-dom"
 import { Login, Signup } from "./components/AuthForm"
 import Home from "./components/Home"
 import { me } from "./store"
@@ -29,6 +29,33 @@ import OTPForm from "./components/OtpAuth"
 const Routes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.id)
   const dispatch = useDispatch()
+  const location = useLocation();
+
+  useEffect(() => {
+    // List of routes where you want to scroll to the top
+    const scrollToTopRoutes = [
+      "/list", 
+      "/pantries", 
+      "/pantries/add", 
+      "/foods", 
+      "/recipes", 
+      "/recipes/add", 
+      "/recipes/:id", 
+      "/recipes/recommended/:id", 
+      "/recipes/:id/edit", 
+      "/home", 
+      "/login", 
+      "/signup"];
+
+    // Check if the current route matches any in the list
+    const shouldScrollToTop = scrollToTopRoutes.some((route) =>
+      new RegExp(`^${route.replace(":id", "[^/]+")}$`).test(location.pathname)
+    );
+
+    if (shouldScrollToTop) {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   useEffect(() => {
     dispatch(me())
