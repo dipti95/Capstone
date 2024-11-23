@@ -109,7 +109,7 @@ const PantryRefactor = () => {
             <div>
               <Form.Label className={styles.label}>Sort By</Form.Label>
               <Form.Select value={sortBy} onChange={handleSortChange}>
-                <option value="name">Name</option>
+                <option value="name">Item</option>
                 <option value="quantity">Quantity</option>
                 <option value="category">Category</option>
               </Form.Select>
