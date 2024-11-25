@@ -1,5 +1,3 @@
-// pantryModel.test.js
-
 const { expect } = require("chai")
 const Pantry = require("./Pantry")
 

@@ -1,15 +1,13 @@
 const { expect } = require("chai")
 const Sequelize = require("sequelize")
-const RecipeIngredientModel = require("./RecipeIngredient") // Adjust the path if necessary
+const RecipeIngredientModel = require("./RecipeIngredient")
 
 describe("RecipeIngredient Model", () => {
   it('should allow setting and getting the "recipeQty" field', () => {
-    // Create an instance of RecipeIngredient without saving to the database
     const recipeIngredient = RecipeIngredientModel.build({
       recipeQty: 2.5,
     })
 
-    // Assert that recipeQty is set correctly
     expect(recipeIngredient.recipeQty).to.equal(2.5)
   })
 

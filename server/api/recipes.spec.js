@@ -1,5 +1,3 @@
-// test/recipes.spec.js
-
 const express = require("express")
 const chai = require("chai")
 const supertest = require("supertest")
@@ -7,47 +5,36 @@ const { expect } = chai
 const sinon = require("sinon")
 const proxyquire = require("proxyquire")
 
-// Import the Sequelize models from db/index.js
 const { models } = require("../db")
 const { Recipe, Ingredient, User, ShoppingList, ShoppingListIngredient } =
   models
 
-// Create a mock for authenticateToken middleware
 const authenticateTokenMock = (req, res, next) => {
   req.user = { id: 1, username: "testuser" }
   next()
 }
 
-// Use proxyquire to replace the actual authenticateToken middleware with the mock
 const recipesRouter = proxyquire("./recipes", {
   "../auth/authenticateToken": authenticateTokenMock,
-  // Mock axios to prevent real HTTP requests during tests
+
   axios: require("axios"),
 })
 
-// Initialize Express App for Testing
 const app = express()
 app.use(express.json())
 app.use("/api/recipes", recipesRouter)
 
-// Add error-handling middleware
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message })
 })
 
-// Begin Test Suite
 describe("Recipes API Endpoints", () => {
   afterEach(() => {
-    sinon.restore() // Restore any stubs or mocks created by sinon
+    sinon.restore()
   })
 
-  /**
-   * Test GET /api/recipes?userId=1
-   * Description: Retrieve all recipes for a user
-   */
   describe("GET /api/recipes", () => {
     it("should return a list of recipes for the user", async () => {
-      // Mock data
       const mockRecipes = [
         {
           id: 1,
@@ -77,7 +64,6 @@ describe("Recipes API Endpoints", () => {
         },
       ]
 
-      // Stub Recipe.findAll to return mockRecipes
       sinon.stub(Recipe, "findAll").resolves(mockRecipes)
 
       const response = await supertest(app)
@@ -106,7 +92,6 @@ describe("Recipes API Endpoints", () => {
     })
 
     it("should return an empty array if the user has no recipes", async () => {
-      // Stub Recipe.findAll to return empty array for userId: 999
       sinon.stub(Recipe, "findAll").resolves([])
 
       const response = await supertest(app)
@@ -118,7 +103,6 @@ describe("Recipes API Endpoints", () => {
     })
 
     it("should handle database errors gracefully", async () => {
-      // Stub Recipe.findAll to throw an error
       sinon.stub(Recipe, "findAll").throws(new Error("Database failure"))
 
       const response = await supertest(app)
@@ -130,13 +114,8 @@ describe("Recipes API Endpoints", () => {
     })
   })
 
-  /**
-   * Test GET /api/recipes/recs?cuisinePref=Italian
-   * Description: Retrieve recommended recipes, optionally filtered by cuisine preference
-   */
   describe("GET /api/recipes/recs", () => {
     it("should return recommended recipes sorted by cuisine preference", async () => {
-      // Mock data
       const mockRecRecipes = [
         {
           id: 3,
@@ -166,7 +145,6 @@ describe("Recipes API Endpoints", () => {
         },
       ]
 
-      // Stub Recipe.findAll to return mockRecRecipes
       sinon.stub(Recipe, "findAll").resolves(mockRecRecipes)
 
       const response = await supertest(app)
@@ -176,13 +154,11 @@ describe("Recipes API Endpoints", () => {
 
       expect(response.body).to.be.an("array").that.has.lengthOf(2)
 
-      // Expect Italian cuisine recipes to come first
       expect(response.body[0].cuisineType).to.equal("Italian")
       expect(response.body[1].cuisineType).to.equal("Mexican")
     })
 
     it("should return all recommended recipes if no cuisine preference is provided", async () => {
-      // Mock data
       const mockRecRecipes = [
         {
           id: 3,
@@ -212,7 +188,6 @@ describe("Recipes API Endpoints", () => {
         },
       ]
 
-      // Stub Recipe.findAll to return mockRecRecipes
       sinon.stub(Recipe, "findAll").resolves(mockRecRecipes)
 
       const response = await supertest(app).get("/api/recipes/recs").expect(200)
@@ -223,7 +198,6 @@ describe("Recipes API Endpoints", () => {
     })
 
     it("should return 200 with an empty array if no recommended recipes are found", async () => {
-      // Stub Recipe.findAll to return empty array
       sinon.stub(Recipe, "findAll").resolves([])
 
       const response = await supertest(app).get("/api/recipes/recs").expect(200)
@@ -232,7 +206,6 @@ describe("Recipes API Endpoints", () => {
     })
 
     it("should handle database errors gracefully", async () => {
-      // Stub Recipe.findAll to throw an error
       sinon.stub(Recipe, "findAll").throws(new Error("Database failure"))
 
       const response = await supertest(app).get("/api/recipes/recs").expect(500)
@@ -241,13 +214,8 @@ describe("Recipes API Endpoints", () => {
     })
   })
 
-  /**
-   * Test GET /api/recipes/:id
-   * Description: Retrieve a specific recipe by ID
-   */
   describe("GET /api/recipes/:id", () => {
     it("should return the recipe with the given ID", async () => {
-      // Mock data
       const mockRecipe = {
         id: 1,
         name: "Spaghetti Bolognese",
@@ -262,7 +230,6 @@ describe("Recipes API Endpoints", () => {
         ],
       }
 
-      // Stub Recipe.findOne to return mockRecipe
       sinon.stub(Recipe, "findOne").resolves(mockRecipe)
 
       const response = await supertest(app).get("/api/recipes/1").expect(200)
@@ -287,7 +254,6 @@ describe("Recipes API Endpoints", () => {
     })
 
     it("should handle database errors gracefully", async () => {
-      // Stub Recipe.findOne to throw an error
       sinon.stub(Recipe, "findOne").throws(new Error("Database failure"))
 
       const response = await supertest(app).get("/api/recipes/1").expect(500)
@@ -296,13 +262,8 @@ describe("Recipes API Endpoints", () => {
     })
   })
 
-  /**
-   * Test POST /api/recipes
-   * Description: Create a new recipe
-   */
   describe("POST /api/recipes", () => {
     it("should handle database errors gracefully", async () => {
-      // Mock request body
       const newRecipeData = {
         name: "Vegetable Stir Fry",
         description: "A healthy vegetable stir fry.",
@@ -316,7 +277,6 @@ describe("Recipes API Endpoints", () => {
         ],
       }
 
-      // Stub Recipe.create to throw an error
       sinon.stub(Recipe, "create").throws(new Error("Database failure"))
 
       const response = await supertest(app)
@@ -330,7 +290,6 @@ describe("Recipes API Endpoints", () => {
 
   describe("PUT /api/recipes/:id", () => {
     it("should handle database errors gracefully", async () => {
-      // Stub Recipe.findByPk to throw an error
       sinon.stub(Recipe, "findByPk").throws(new Error("Database failure"))
 
       const updateData = {

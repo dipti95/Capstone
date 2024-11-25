@@ -1,7 +1,5 @@
-// recipeModel.test.js
-
 const { expect } = require("chai")
-const Recipe = require("./Recipe") // Adjust the path according to your project structure
+const Recipe = require("./Recipe")
 
 describe("Recipe Model", () => {
   describe("Field Validations", () => {

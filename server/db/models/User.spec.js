@@ -9,7 +9,6 @@ let testUser
 let sendMailStub
 
 describe("User Model", () => {
-  //process.env.JWT = "secretkey"
   before(async () => {
     const db = require("../db")
     await db.sync({ force: true })
@@ -73,7 +72,7 @@ describe("User Model", () => {
     it("should not create a user with a duplicate username", async () => {
       try {
         await User.create({
-          username: "testuser", // duplicate username
+          username: "testuser",
           password: "password",
           email: "duplicate@example.com",
         })
@@ -155,10 +154,8 @@ describe("User Model", () => {
       expect(response.message).to.equal("OTP sent to your email")
       expect(response.userId).to.equal(testUser.id)
 
-      // Verify that sendMail was called
       expect(sendMailStub.calledOnce).to.be.true
 
-      // Check that OTP and expiration were set
       const user = await User.findByPk(testUser.id)
       expect(user.otp).to.be.a("string").with.lengthOf(6)
       expect(user.otpExpiration).to.be.an.instanceof(Date)
@@ -222,7 +219,7 @@ describe("User Model", () => {
       try {
         await User.verifyOTP({
           username: "testuser",
-          otp: "000000", // incorrect OTP
+          otp: "000000",
         })
         throw new Error("OTP verification should have failed")
       } catch (error) {
@@ -232,7 +229,6 @@ describe("User Model", () => {
     })
 
     it("should not verify an expired OTP", async () => {
-      // Manually expire the OTP
       await testUser.update({ otpExpiration: new Date(Date.now() - 600000) })
 
       try {
