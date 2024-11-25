@@ -1,79 +1,59 @@
-// // usersRoute.test.js
+const express = require("express")
+const chai = require("chai")
+const sinon = require("sinon")
+const supertest = require("supertest")
+const proxyquire = require("proxyquire")
 
-// const request = require("supertest")
-// const express = require("express")
-// const { expect } = require("chai")
-// const proxyquire = require("proxyquire").noCallThru()
-// const { db } = require("../db") // Sequelize instance
+const {
+  models: { User },
+} = require("../db") // Correct import for User
 
-// const User = require("../db/models/User.js") // Import User model directly
+const { expect } = chai
 
-// describe("Users Route", () => {
-//   let app
+// Mock `authenticateToken` middleware
+const authenticateTokenStub = (req, res, next) => next()
 
-//   before(async () => {
-//     await db.sync({ force: true })
-//   })
+// Use `proxyquire` to override `authenticateToken` in the router
+const usersRouter = proxyquire("./users", {
+  "../auth/authenticateToken": authenticateTokenStub,
+})
 
-//   beforeEach(async () => {
-//     app = express()
-//     app.use(express.json())
+const app = express()
+app.use(express.json())
+app.use("/api/users", usersRouter)
 
-//     const usersRouter = proxyquire("./users", {
-//       "../auth/authenticateToken": (req, res, next) => {
-//         req.user = { id: 1, username: "testuser" }
-//         next()
-//       },
-//     })
+// Add error-handling middleware
+app.use((err, req, res, next) => {
+  res.status(err.status || 500).json({ error: err.message })
+})
 
-//     app.use("/users", usersRouter)
+describe("GET /api/users", () => {
+  afterEach(() => {
+    sinon.restore() // Restore all stubs
+  })
 
-//     await User.bulkCreate([
-//       { username: "user1", password: "pass1", email: "user1@example.com" },
-//       { username: "user2", password: "pass2", email: "user2@example.com" },
-//     ])
-//   })
+  it("should return a list of users", async () => {
+    // Mock the User model's findAll method
+    const mockUsers = [
+      { id: 1, username: "user1" },
+      { id: 2, username: "user2" },
+    ]
+    sinon.stub(User, "findAll").resolves(mockUsers)
 
-//   afterEach(async () => {
-//     await User.destroy({ where: {} })
-//   })
+    const response = await supertest(app).get("/api/users")
 
-//   after(async () => {
-//     await db.close()
-//   })
+    expect(response.status).to.equal(200)
+    expect(response.body).to.deep.equal(mockUsers)
+    expect(User.findAll.calledOnce).to.be.true
+  })
 
-//   describe("GET /users", () => {
-//     it("should return a list of users when authenticated", async () => {
-//       const res = await request(app)
-//         .get("/users")
-//         .set("Authorization", "Bearer fake-token")
+  it("should handle errors gracefully", async () => {
+    // Mock the User model's findAll method to throw an error
+    sinon.stub(User, "findAll").rejects(new Error("Database error"))
 
-//       expect(res.status).to.equal(200)
-//       expect(res.body).to.be.an("array").with.lengthOf(2)
-//       res.body.forEach((user) => {
-//         expect(user).to.have.property("id")
-//         expect(user).to.have.property("username")
-//         expect(user).to.not.have.property("password")
-//         expect(user).to.not.have.property("email")
-//       })
-//     })
+    const response = await supertest(app).get("/api/users")
 
-//     it("should return 401 when not authenticated", async () => {
-//       app = express()
-//       app.use(express.json())
-
-//       const usersRouter = proxyquire("./users", {
-//         "../auth/authenticateToken": (req, res, next) => {
-//           res.status(401).json({ error: "Authentication required" })
-//         },
-//       })
-
-//       app.use("/users", usersRouter)
-
-//       const res = await request(app).get("/users")
-
-//       expect(res.status).to.equal(401)
-//       expect(res.body).to.have.property("error", "Authentication required")
-//     })
-//   })
-// })
+    expect(response.status).to.equal(500)
+    expect(response.body).to.have.property("error", "Database error")
+  })
+})
