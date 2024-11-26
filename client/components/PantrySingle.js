@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { fetchSinglePantry, editPantryThunk } from "../store/pantry"
+import { editPantryThunk } from "../store/pantry"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Table from "react-bootstrap/Table"
 import styles from "./PantrySingle.module.css"
 
-const PantrySingle = () => {
+const PantrySingle = ({ ingredients }) => {
   const dispatch = useDispatch()
   const { id } = useSelector((state) => state.auth)
-  const { pantry } = useSelector((state) => state)
-  const { ingredients } = pantry
+  const pantry = useSelector((state) => state.pantry)
   let currentPantry = pantry.id
 
   async function handleChange(itemId, userId, quantity) {
@@ -80,6 +79,7 @@ const PantrySingle = () => {
                     </tr>
                   )
                 })}
+
             </tbody>
           </Table>
         ) : (
