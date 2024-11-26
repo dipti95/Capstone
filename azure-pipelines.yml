@@ -18,7 +18,7 @@ steps:
 
   # Step 2: Install dependencies and build
   - script: |
-      npm ci
+      npm install
       npm run build
     displayName: 'Install dependencies and build application'
 
