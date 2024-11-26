@@ -18,7 +18,7 @@
 
 .chartCard {
   width: 47%;
-  height: 750px;
+  height: 600px !important;
   margin-top: 50px;
 }
 

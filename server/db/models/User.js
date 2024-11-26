@@ -141,8 +141,8 @@ async function sendOTPEmail(toEmail, otp) {
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: toEmail,
-    subject: "Your OTP Code",
-    text: `Your OTP code is ${otp}. It will expire in 5 minutes.`,
+    subject: "Food Buddy Security Code",
+    text: `Your Food Buddy login security code is ${otp}. It will expire in 5 minutes.`,
   }
 
   await transporter.sendMail(mailOptions)

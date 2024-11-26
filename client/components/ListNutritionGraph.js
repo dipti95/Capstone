@@ -62,7 +62,7 @@ const listNutritionGraph = () => {
   }, [shoppingHistory])
 
   return (
-    <div style={{ height: "650px" }}>
+    <div style={{ height: "600px" }}>
       <VictoryChart
         domainPadding={{ x: 20 }}
         height={500}
@@ -71,7 +71,7 @@ const listNutritionGraph = () => {
       >
         <VictoryLegend
           x={600}
-          y={60}
+          y={20}
           title="Legend"
           centerTitle
           orientation="vertical"
@@ -86,7 +86,7 @@ const listNutritionGraph = () => {
         <VictoryLabel
           text="Nutrition of Shopping Lists"
           x={350}
-          y={30}
+          y={-20}
           textAnchor="middle"
           style={{ fontSize: 25 }}
         />
@@ -107,7 +107,8 @@ const listNutritionGraph = () => {
               fontWeight: 100,
               letterSpacing: "1px",
               fontSize: 20,
-              padding: 50,
+              // padding: 40,
+              padding: 100,
             },
           }}
         />

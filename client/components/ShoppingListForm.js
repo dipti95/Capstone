@@ -22,16 +22,17 @@ const ShoppingListForm = ({ props }) => {
   return (
     <>
       <tr>
-        <td className={styles.enlarge}>{props.name} </td>
-        <td>
+        <td className={styles.listItem}>{props.name} </td>
+        <td className={styles.listQuantityCell}>
           <Form.Control
             type="text"
             name="quantity"
             value={newQuantity}
             onChange={(e) => handleQuantityChange(e)}
+            className={styles.listQuantity}
           />
         </td>
-        <td className={styles.enlarge}>{props.uom} </td>
+        <td className={styles.listItem}>{props.uom} </td>
         <td className={styles.enlarge}>
           <Button
             className={styles.removebutton}

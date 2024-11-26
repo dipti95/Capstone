@@ -52,7 +52,7 @@ export const createNewPantry = (name, id) => {
           },
         }
       )
-      console.log("our data", data)
+      //console.log("our data", data)
       dispatch(_createNewPantry(data))
     } catch (error) {
       console.log(error)

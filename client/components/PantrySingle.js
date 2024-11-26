@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { fetchSinglePantry, editPantryThunk } from "../store/pantry"
+import { editPantryThunk } from "../store/pantry"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/Container"
 import Table from "react-bootstrap/Table"
 import styles from "./PantrySingle.module.css"
 
-const PantrySingle = () => {
+const PantrySingle = ({ ingredients }) => {
   const dispatch = useDispatch()
   const { id } = useSelector((state) => state.auth)
-  const { pantry } = useSelector((state) => state)
-  const { ingredients } = pantry
+  const pantry = useSelector((state) => state.pantry)
   let currentPantry = pantry.id
 
   async function handleChange(itemId, userId, quantity) {
@@ -27,59 +26,48 @@ const PantrySingle = () => {
                 <th className={styles.enlarge}>Item</th>
                 <th className={styles.enlarge}>Category</th>
                 <th className={styles.enlarge}>Quantity</th>
-                <th className={styles.enlarge}>UOM</th>
+                <th className={styles.enlarge}>Unit of Measure</th>
                 <th className={styles.enlarge}>Remove</th>
               </tr>
             </thead>
             <tbody>
-              {ingredients
-                .sort(function (a, b) {
-                  if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
-                  if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
-                  return 0
-                })
-                .map((item) => {
-                  const quantity = item.pantryIngredient.pantryQty
-                  return (
-                    <tr className={styles.row} key={item.id}>
-                      <td className={styles.enlarge}>{item.name}</td>
-                      <td className={styles.enlarge}>{item.category}</td>
-
-                      <td className={styles.enlarge}>
-                        <Button
-                          className={styles.qtyButton}
-                          variant="primary"
-                          onClick={() =>
-                            handleChange(item.id, id, quantity - 1)
-                          }
-                        >
-                          -
-                        </Button>{" "}
-                        {quantity}
-                        <Button
-                          className={styles.qtyButton}
-                          variant="primary"
-                          onClick={() =>
-                            handleChange(item.id, id, quantity + 1)
-                          }
-                        >
-                          +
-                        </Button>
-                      </td>
-                      <th className={styles.enlarge}>{item.uom}</th>
-                      <td className={styles.enlarge}>
-                        <Button
-                          className={styles.qtyButton}
-                          variant="primary"
-                          type="button"
-                          onClick={() => handleChange(item.id, id, 0)}
-                        >
-                          x
-                        </Button>
-                      </td>
-                    </tr>
-                  )
-                })}
+              {ingredients.map((item) => {
+                const quantity = item.pantryIngredient.pantryQty
+                return (
+                  <tr className={styles.row} key={item.id}>
+                    <td className={styles.listItem}>{item.name}</td>
+                    <td className={styles.listItem}>{item.category}</td>
+                    <td className={styles.listItem}>
+                      <Button
+                        className={styles.qtyButton}
+                        variant="primary"
+                        onClick={() => handleChange(item.id, id, quantity - 1)}
+                      >
+                        -
+                      </Button>{" "}
+                      {quantity}
+                      <Button
+                        className={styles.qtyButton}
+                        variant="primary"
+                        onClick={() => handleChange(item.id, id, quantity + 1)}
+                      >
+                        +
+                      </Button>
+                    </td>
+                    <td className={styles.listItem}>{item.uom}</td>
+                    <td className={styles.enlarge}>
+                      <Button
+                        className={styles.removebutton}
+                        variant="primary"
+                        type="button"
+                        onClick={() => handleChange(item.id, id, 0)}
+                      >
+                        x
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </Table>
         ) : (
@@ -98,7 +86,7 @@ const PantrySingle = () => {
                   <th>Category</th>
 
                   <th>Quantity</th>
-                  <th>UOM</th>
+                  <th>Unit of Measure</th>
                   <th>Remove</th>
                 </tr>
               </thead>

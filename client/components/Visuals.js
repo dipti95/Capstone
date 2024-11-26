@@ -80,80 +80,86 @@ const Visuals = () => {
   const categoricalData = groupByCategory(data)
 
   return (
-    <>
-      <select name="pantries" onChange={(e) => handlePantryChange(e)}>
-        <option value="View All Pantries">View All Pantries</option>
-        {pantries.map((pantry) => (
-          <option key={pantry.id} value={pantry.name}>
-            {pantry.name}
-          </option>
-        ))}
-      </select>
+    <div style={{ height: "550px" }}>
+      <>
+        <select name="pantries" onChange={(e) => handlePantryChange(e)}>
+          <option value="View All Pantries">View All Pantries</option>
+          {pantries.map((pantry) => (
+            <option key={pantry.id} value={pantry.name}>
+              {pantry.name}
+            </option>
+          ))}
+        </select>
 
-      <VictoryChart
-        theme={VictoryTheme.material}
-        domainPadding={{ x: 20 }}
-        height={500}
-        width={700}
-        animate={{ duration: 500 }}
-      >
-        <VictoryLabel
-          text={
-            selectedPantry === "View All Pantries"
-              ? "Quantities of Foods in All Your Pantries"
-              : `Quantities of Foods in Your ${selectedPantry} Pantry`
-          }
-          x={350}
-          y={30}
-          textAnchor="middle"
-          style={{ fontSize: 25 }}
-        />
-        <VictoryAxis
-          axisLabelComponent={<VictoryLabel />}
-          label={"My Food"}
-          crossAxis
-          style={{
-            tickLabels: {
-              angle: -45,
-              fontSize: 10,
-              textAnchor: "end",
-              padding: 2,
-            },
-            axisLabel: {
-              label: "My Food",
-              fontFamily: "inherit",
-              fontWeight: 100,
-              letterSpacing: "1px",
-              fontSize: 20,
-              padding: 50,
-            },
-          }}
-        />
-        <VictoryAxis
-          dependentAxis
-          axisLabelComponent={<VictoryLabel />}
-          label={"Quantity"}
-          tickFormat={(t) => (Number.isInteger(t) ? t : null)}
-          style={{
-            tickLabels: { fontSize: 5 },
-            axisLabel: {
-              label: "Quantity",
-              fontFamily: "inherit",
-              fontWeight: 100,
-              letterSpacing: "1px",
-              fontSize: 20,
-              padding: 30,
-            },
-          }}
-        />
-        <VictoryBar
-          barWidth={({ index }) => index * 2 + 12}
-          data={categoricalData}
-          x="category"
-          y="quantity"
-        />
-      </VictoryChart>
-    </>
+        <VictoryChart
+          theme={VictoryTheme.material}
+          domainPadding={{ x: 20 }}
+          height={500}
+          width={700}
+          animate={{ duration: 500 }}
+        >
+          <VictoryLabel
+            text={
+              selectedPantry === "View All Pantries"
+                ? "Quantities of Foods in All Your Pantries"
+                : `Quantities of Foods in Your ${selectedPantry} Pantry`
+            }
+            x={350}
+            y={-10}
+            textAnchor="middle"
+            style={{ fontSize: 25 }}
+          />
+          <VictoryAxis
+            axisLabelComponent={<VictoryLabel />}
+            label={"My Food"}
+            crossAxis
+            style={{
+              tickLabels: {
+                angle: -45,
+                fontSize: 10,
+                textAnchor: "end",
+                padding: 2,
+              },
+              axisLabel: {
+                label: "My Food",
+                fontFamily: "inherit",
+                fontWeight: 100,
+                letterSpacing: "1px",
+                fontSize: 20,
+                // padding: 50,
+                padding: 100,
+              },
+            }}
+          />
+          <VictoryAxis
+            dependentAxis
+            axisLabelComponent={<VictoryLabel />}
+            label={"Quantity"}
+            tickFormat={(t) => (Number.isInteger(t) ? t : null)}
+            style={{
+              tickLabels: { fontSize: 10 },
+              axisLabel: {
+                label: "Quantity",
+                fontFamily: "inherit",
+                fontWeight: 100,
+                letterSpacing: "1px",
+                fontSize: 20,
+                padding: 32,
+              },
+            }}
+          />
+          <VictoryBar
+            barWidth={({ index }) => index * 2 + 12}
+            data={categoricalData}
+            style={{
+              data: { fill: "#2c5f34" },
+            }}
+            x="category"
+            y="quantity"
+          />
+        </VictoryChart>
+      </>
+    </div>
   )
 }
 

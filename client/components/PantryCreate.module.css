@@ -12,3 +12,7 @@
 .pantryForm {
   display: inline;
 }
+
+.alert {
+  margin-top: 20px;
+}
