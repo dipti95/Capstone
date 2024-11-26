@@ -77,21 +77,24 @@ const VisualNutrition = () => {
   }))
 
   return didLoad ? (
-
-    <div style={{ height: "650px", width: "100%", overflowX: "auto" }}>
-
+    // <div style={{ height: "650px", width: "100%", overflowX: "auto" }}>
+    <div style={{ height: "600px" }}>
       <VictoryChart
-        domainPadding={{ x: 50, y: 20 }}
+        //domainPadding={{ x: 50, y: 20 }}
+        domainPadding={{ x: 20 }}
         height={500}
-        width={800}
+        width={700}
         animate={{
-          duration: 2000,
+          duration: 500,
         }}
         theme={VictoryTheme.material}
       >
         <VictoryLegend
           x={600}
-          y={50}
+          // y={50}
+          y={20}
+          title="Legend"
+          //---
           orientation="vertical"
           gutter={20}
           style={{
@@ -106,28 +109,34 @@ const VisualNutrition = () => {
           ]}
         />
         <VictoryLabel
-
           text="Nutrient Content of Foods by Category"
-          x={400}
-          y={30}
-
+          // x={400}
+          // y={30}
+          // textAnchor="middle"
+          // style={{ fontSize: 25, padding: 100 }}
+          x={350}
+          y={-20}
           textAnchor="middle"
-          style={{ fontSize: 25, padding: 100 }}
+          style={{ fontSize: 25 }}
         />
         <VictoryAxis
-          label="Food Categories"
+          label={"Food Categories"}
+          crossAxis
           style={{
             tickLabels: {
               angle: -45,
               fontSize: 10,
               textAnchor: "end",
-              padding: 15,
+              // padding: 15,
+              padding: 2,
             },
             axisLabel: {
+              label: "Food Categories",
+              fontFamily: "inherit",
+              fontWeight: 100,
               fontSize: 20,
 
               padding: 100,
-
             },
           }}
         />
@@ -135,11 +144,22 @@ const VisualNutrition = () => {
           dependentAxis
           label="Amount (grams)"
           tickFormat={(t) => (Number.isInteger(t) ? t : null)}
+          // style={{
+          //   tickLabels: { fontSize: 10 },
+          //   axisLabel: {
+          //     fontSize: 20,
+          //     padding: 35,
+          //   },
+          // }}
           style={{
             tickLabels: { fontSize: 10 },
             axisLabel: {
+              label: "Grams",
+              fontFamily: "inherit",
+              fontWeight: 100,
+              letterSpacing: "1px",
               fontSize: 20,
-              padding: 35,
+              padding: 30,
             },
           }}
         />
@@ -151,7 +171,6 @@ const VisualNutrition = () => {
           <VictoryBar data={carbsData} />
         </VictoryStack>
       </VictoryChart>
-
     </div>
   ) : (
     <div>Loading...</div>

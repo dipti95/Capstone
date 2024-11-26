@@ -31,55 +31,43 @@ const PantrySingle = ({ ingredients }) => {
               </tr>
             </thead>
             <tbody>
-              {ingredients
-                .sort(function (a, b) {
-                  if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
-                  if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
-                  return 0
-                })
-                .map((item) => {
-                  const quantity = item.pantryIngredient.pantryQty
-                  return (
-                    <tr className={styles.row} key={item.id}>
-                      <td className={styles.listItem}>{item.name}</td>
-                      <td className={styles.listItem}>{item.category}</td>
-
-                      <td className={styles.listItem}>
-                        <Button
-                          className={styles.qtyButton}
-                          variant="primary"
-                          onClick={() =>
-                            handleChange(item.id, id, quantity - 1)
-                          }
-                        >
-                          -
-                        </Button>{" "}
-                        {quantity}
-                        <Button
-                          className={styles.qtyButton}
-                          variant="primary"
-                          onClick={() =>
-                            handleChange(item.id, id, quantity + 1)
-                          }
-                        >
-                          +
-                        </Button>
-                      </td>
-                      <td className={styles.listItem}>{item.uom}</td>
-                      <td className={styles.enlarge}>
-                        <Button
-                          className={styles.removebutton}
-                          variant="primary"
-                          type="button"
-                          onClick={() => handleChange(item.id, id, 0)}
-                        >
-                          x
-                        </Button>
-                      </td>
-                    </tr>
-                  )
-                })}
-
+              {ingredients.map((item) => {
+                const quantity = item.pantryIngredient.pantryQty
+                return (
+                  <tr className={styles.row} key={item.id}>
+                    <td className={styles.listItem}>{item.name}</td>
+                    <td className={styles.listItem}>{item.category}</td>
+                    <td className={styles.listItem}>
+                      <Button
+                        className={styles.qtyButton}
+                        variant="primary"
+                        onClick={() => handleChange(item.id, id, quantity - 1)}
+                      >
+                        -
+                      </Button>{" "}
+                      {quantity}
+                      <Button
+                        className={styles.qtyButton}
+                        variant="primary"
+                        onClick={() => handleChange(item.id, id, quantity + 1)}
+                      >
+                        +
+                      </Button>
+                    </td>
+                    <td className={styles.listItem}>{item.uom}</td>
+                    <td className={styles.enlarge}>
+                      <Button
+                        className={styles.removebutton}
+                        variant="primary"
+                        type="button"
+                        onClick={() => handleChange(item.id, id, 0)}
+                      >
+                        x
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </Table>
         ) : (

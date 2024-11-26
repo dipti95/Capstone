@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react"
 import {
   VictoryBar,
   VictoryChart,
   VictoryAxis,
   VictoryTheme,
   VictoryLabel,
-} from 'victory';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchShoppingListHistory } from '../store/ShoppingList';
+} from "victory"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchShoppingListHistory } from "../store/ShoppingList"
 
 const Visual2 = () => {
-  const dispatch = useDispatch();
-  const { id } = useSelector((state) => state.auth);
-  const { shoppingHistory } = useSelector((state) => state.shoppingList);
+  const dispatch = useDispatch()
+  const { id } = useSelector((state) => state.auth)
+  const { shoppingHistory } = useSelector((state) => state.shoppingList)
 
   useEffect(() => {
     dispatch(fetchShoppingListHistory(id))
   }, [])
 
-let data = []
-let innerData = []
-let tempData = {}
-let finalData = []
+  let data = []
+  let innerData = []
+  let tempData = {}
+  let finalData = []
 
   if (shoppingHistory) {
-    data = shoppingHistory.map(list => {
-      return list.ingredients.map(item => {
+    data = shoppingHistory.map((list) => {
+      return list.ingredients.map((item) => {
         innerData.push(item.name)
         return item.name
       })
     })
   }
 
-  innerData.forEach(item => {
+  innerData.forEach((item) => {
     if (tempData[item]) {
       tempData[item] += 1
     } else {
@@ -41,11 +41,11 @@ let finalData = []
   })
 
   for (const [key, value] of Object.entries(tempData)) {
-    finalData.push({item: key, frequency: value})
+    finalData.push({ item: key, frequency: value })
   }
 
   return (
-    <div style={{ height: '560px' }}>
+    <div style={{ height: "560px" }}>
       <VictoryChart
         theme={VictoryTheme.material}
         domainPadding={{ x: 20 }}
@@ -54,7 +54,7 @@ let finalData = []
         animate={{ duration: 500 }}
       >
         <VictoryLabel
-          text='Frequently Bought Items'
+          text="Frequently Bought Items"
           x={350}
           y={0}
           textAnchor="middle"
@@ -62,50 +62,52 @@ let finalData = []
         />
         <VictoryAxis
           axisLabelComponent={<VictoryLabel />}
-          label={'My Food'}
+          label={"My Food"}
           crossAxis
           style={{
             tickLabels: {
-              textAnchor:"end",
+              textAnchor: "end",
               padding: 2,
               angle: -45,
               fontSize: 10,
             },
             axisLabel: {
-              label: 'My Food',
-              fontFamily: 'inherit',
+              label: "My Food",
+              fontFamily: "inherit",
               fontWeight: 100,
-              letterSpacing: '1px',
+              letterSpacing: "1px",
               fontSize: 20,
-              padding: 50,
+              // padding: 50,
+              padding: 100,
             },
           }}
         />
         <VictoryAxis
           dependentAxis
           axisLabelComponent={<VictoryLabel />}
-          label={'Frequency'}
+          label={"Frequency"}
           tickFormat={(t) => (Number.isInteger(t) ? t : null)}
           style={{
-            tickLabels: { fontSize: 10, textAnchor:"end" },
+            tickLabels: { fontSize: 10, textAnchor: "end" },
             axisLabel: {
-              label: 'frequency',
-              fontFamily: 'inherit',
+              label: "frequency",
+              fontFamily: "inherit",
               fontWeight: 100,
-              letterSpacing: '1px',
+              letterSpacing: "1px",
               fontSize: 20,
               padding: 30,
             },
           }}
         />
-        <VictoryBar 
-          data={finalData} 
+        <VictoryBar
+          data={finalData}
           style={{
-            data: {fill: "#2c5f34"}}
-          }
-          x='item' y='frequency' 
+            data: { fill: "#2c5f34" },
+          }}
+          x="item"
+          y="frequency"
         />
-        </VictoryChart>
+      </VictoryChart>
     </div>
   )
 }

@@ -107,7 +107,8 @@ const listNutritionGraph = () => {
               fontWeight: 100,
               letterSpacing: "1px",
               fontSize: 20,
-              padding: 40,
+              // padding: 40,
+              padding: 100,
             },
           }}
         />
