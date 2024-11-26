@@ -9,7 +9,7 @@ import {
 import { getOurFoods } from "../store/pantriesFoods"
 import { addRecToMyRecipes } from "../store/recipes"
 import styles from "./RecRecipes.module.css"
-import { Card, Button, Container } from "react-bootstrap"
+import { Card, Button, Container, Row, Col } from "react-bootstrap"
 import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
 
@@ -18,7 +18,9 @@ const RecRecipes = () => {
   let { recRecipes, pantriesFoods, recipes } = useSelector((state) => state)
   const dispatch = useDispatch()
   const [currentView, setCurrentView] = useState(null)
-  const [index, setIndex] = useState(0)
+  {/* const [index, setIndex] = useState(0) */}
+  const [itemsToShow, setItemsToShow] = useState(8) // Initial number of items
+
 
   useEffect(() => {
     dispatch(showRecRecipes(cuisinePref))
@@ -122,8 +124,13 @@ const RecRecipes = () => {
 
   recRecipes = sortByCuisinePref(recRecipes)
 
-  const handleSelect = (selectedIndex, e) => {
+  {/* const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex)
+  } */}
+
+  // Load more handler to increment items to show
+  const handleLoadMore = () => {
+    setItemsToShow(itemsToShow + 8) // Load 8 more items each click
   }
 
   const responsive = {
@@ -142,46 +149,59 @@ const RecRecipes = () => {
   }
 
   return (
-    <Carousel responsive={responsive} arrows showDots={false}>
-      {recRecipes.map((recipe) => (
-        <Card
-          key={recipe.id}
-          className={
-            recipe.id === currentView
-              ? styles.expandedCard
-              : styles.recRecipeCard
-          }
-        >
-          <Card.Img
-            variant="top"
-            className={styles.recipeImg}
-            src={recipe.image}
-          />
-          <Card.Body>
-            <Card.Title>
-              {recipe.id === currentView
-                ? recipe.name
-                : recipe.name.slice(0, 20)}
-              {recipe.id !== currentView && recipe.name.length > 20
-                ? "..."
-                : ""}
-            </Card.Title>
-            <Link to={`/recipes/recommended/${recipe.id}`}>
-              <Button variant="primary" className={styles.button}>
-                View
+   
+    <Container className={styles.recipeGridContainer}>
+      {/* {recRecipes.map((recipe) => ( */}
+      {recRecipes.slice(0, itemsToShow).map((recipe) => ( // Display only the items within the limit
+        <Container className={styles.cardContainer}>
+          <Card
+            key={recipe.id}
+            className={
+              recipe.id === currentView
+                ? styles.expandedCard
+                : styles.recRecipeCard
+            }
+          >
+            <Card.Img
+              variant="top"
+              className={styles.recipeImg}
+              src={recipe.image}
+            />
+            <Card.Body>
+              <Card.Title>
+                {recipe.id === currentView
+                  ? recipe.name
+                  : recipe.name.slice(0, 20)}
+                {recipe.id !== currentView && recipe.name.length > 20
+                  ? "..."
+                  : ""}
+              </Card.Title>
+              <Link to={`/recipes/recommended/${recipe.id}`}>
+                <Button variant="primary" className={styles.button}>
+                  View
+                </Button>
+              </Link>
+              <Button
+                variant="outline-primary"
+                className={styles.buttonOutline}
+                onClick={() => addToMyRecipes(recipe.id)}
+              >
+                Add to My Recipes
               </Button>
-            </Link>
-            <Button
-              variant="outline-primary"
-              className={styles.buttonOutline}
-              onClick={() => addToMyRecipes(recipe.id)}
-            >
-              Add to My Recipes
-            </Button>
-          </Card.Body>
-        </Card>
+            </Card.Body>
+          </Card>
+        </Container>
       ))}
-    </Carousel>
+      {/* Load More button */}
+      {itemsToShow < recRecipes.length && (
+        <div className="text-center mt-4">
+          <Button onClick={handleLoadMore} className={styles.button} variant="primary">
+            Load More
+          </Button>
+        </div>
+      )}
+    </Container>
+
   )
 }
 

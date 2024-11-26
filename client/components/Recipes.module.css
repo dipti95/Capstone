@@ -1,6 +1,7 @@
 body {
   font-family: 'Lato', sans-serif;
   color: #012a36;
+  padding-top: 90px;
 }
 
 .recipesPage {
@@ -88,7 +89,9 @@ body {
 }
 
 .recRecipeCard {
-  width: 1000px;
-  display: flex;
   padding: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

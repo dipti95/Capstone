@@ -61,3 +61,14 @@
 .recipeImg {
   height: 56.25%;
 }
+.recipeGridContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cardContainer {
+  flex: 1 1 calc(25% - 20px); /* Adjust the width for different screen sizes */
+  max-width: 300px; /* Max width for large screens */
+}

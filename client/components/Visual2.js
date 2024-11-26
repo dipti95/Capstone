@@ -45,7 +45,7 @@ let finalData = []
   }
 
   return (
-    <div style={{ height: '650px' }}>
+    <div style={{ height: '560px' }}>
       <VictoryChart
         theme={VictoryTheme.material}
         domainPadding={{ x: 20 }}
@@ -56,7 +56,7 @@ let finalData = []
         <VictoryLabel
           text='Frequently Bought Items'
           x={350}
-          y={30}
+          y={0}
           textAnchor="middle"
           style={{ fontSize: 25 }}
         />
@@ -87,7 +87,7 @@ let finalData = []
           label={'Frequency'}
           tickFormat={(t) => (Number.isInteger(t) ? t : null)}
           style={{
-            tickLabels: { fontSize: 5, textAnchor:"end" },
+            tickLabels: { fontSize: 10, textAnchor:"end" },
             axisLabel: {
               label: 'frequency',
               fontFamily: 'inherit',
@@ -98,7 +98,13 @@ let finalData = []
             },
           }}
         />
-        <VictoryBar data={finalData} x='item' y='frequency' />
+        <VictoryBar 
+          data={finalData} 
+          style={{
+            data: {fill: "#2c5f34"}}
+          }
+          x='item' y='frequency' 
+        />
         </VictoryChart>
     </div>
   )

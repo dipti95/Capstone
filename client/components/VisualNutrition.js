@@ -77,7 +77,9 @@ const VisualNutrition = () => {
   }))
 
   return didLoad ? (
+
     <div style={{ height: "650px", width: "100%", overflowX: "auto" }}>
+
       <VictoryChart
         domainPadding={{ x: 50, y: 20 }}
         height={500}
@@ -104,9 +106,11 @@ const VisualNutrition = () => {
           ]}
         />
         <VictoryLabel
+
           text="Nutrient Content of Foods by Category"
           x={400}
           y={30}
+
           textAnchor="middle"
           style={{ fontSize: 25, padding: 100 }}
         />
@@ -121,7 +125,9 @@ const VisualNutrition = () => {
             },
             axisLabel: {
               fontSize: 20,
+
               padding: 100,
+
             },
           }}
         />
@@ -137,6 +143,7 @@ const VisualNutrition = () => {
             },
           }}
         />
+
         <VictoryStack colorScale={["tomato", "orange", "gold", "cyan"]}>
           <VictoryBar data={caloriesData} />
           <VictoryBar data={fatsData} />
@@ -144,6 +151,7 @@ const VisualNutrition = () => {
           <VictoryBar data={carbsData} />
         </VictoryStack>
       </VictoryChart>
+
     </div>
   ) : (
     <div>Loading...</div>

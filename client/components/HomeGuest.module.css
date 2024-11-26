@@ -18,6 +18,8 @@
   align-items: center; /* Center items horizontally */
   background-size: cover; /* Cover the container while preserving aspect ratio */
   background-position: center;
+  margin-top: 20px;
+  margin: 20px 75px 0px 75px;
 }
 
 .welcomeContainer {

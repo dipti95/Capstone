@@ -31,7 +31,11 @@
 }
 
 .editRecipeImg {
-  height: 56.25%;
+/*  height: 56.25%; */
+  height: 250px; /* Set the height to 350px */
+  width: 100%; /* Ensure the image takes up the full width */
+  object-fit: cover; /* Ensure the image scales without stretching */
+  object-position: middle; /* Align the image to the top */
 }
 
 .recipeInfo {

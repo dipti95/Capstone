@@ -26,48 +26,60 @@ const PantrySingle = ({ ingredients }) => {
                 <th className={styles.enlarge}>Item</th>
                 <th className={styles.enlarge}>Category</th>
                 <th className={styles.enlarge}>Quantity</th>
-                <th className={styles.enlarge}>UOM</th>
+                <th className={styles.enlarge}>Unit of Measure</th>
                 <th className={styles.enlarge}>Remove</th>
               </tr>
             </thead>
             <tbody>
-              {ingredients.map((item) => {
-                const quantity = item.pantryIngredient.pantryQty
-                return (
-                  <tr className={styles.row} key={item.id}>
-                    <td className={styles.enlarge}>{item.name}</td>
-                    <td className={styles.enlarge}>{item.category}</td>
-                    <td className={styles.enlarge}>
-                      <Button
-                        className={styles.qtyButton}
-                        variant="primary"
-                        onClick={() => handleChange(item.id, id, quantity - 1)}
-                      >
-                        -
-                      </Button>{" "}
-                      {quantity}
-                      <Button
-                        className={styles.qtyButton}
-                        variant="primary"
-                        onClick={() => handleChange(item.id, id, quantity + 1)}
-                      >
-                        +
-                      </Button>
-                    </td>
-                    <td className={styles.enlarge}>{item.uom}</td>
-                    <td className={styles.enlarge}>
-                      <Button
-                        className={styles.qtyButton}
-                        variant="primary"
-                        type="button"
-                        onClick={() => handleChange(item.id, id, 0)}
-                      >
-                        x
-                      </Button>
-                    </td>
-                  </tr>
-                )
-              })}
+              {ingredients
+                .sort(function (a, b) {
+                  if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
+                  if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+                  return 0
+                })
+                .map((item) => {
+                  const quantity = item.pantryIngredient.pantryQty
+                  return (
+                    <tr className={styles.row} key={item.id}>
+                      <td className={styles.listItem}>{item.name}</td>
+                      <td className={styles.listItem}>{item.category}</td>
+
+                      <td className={styles.listItem}>
+                        <Button
+                          className={styles.qtyButton}
+                          variant="primary"
+                          onClick={() =>
+                            handleChange(item.id, id, quantity - 1)
+                          }
+                        >
+                          -
+                        </Button>{" "}
+                        {quantity}
+                        <Button
+                          className={styles.qtyButton}
+                          variant="primary"
+                          onClick={() =>
+                            handleChange(item.id, id, quantity + 1)
+                          }
+                        >
+                          +
+                        </Button>
+                      </td>
+                      <td className={styles.listItem}>{item.uom}</td>
+                      <td className={styles.enlarge}>
+                        <Button
+                          className={styles.removebutton}
+                          variant="primary"
+                          type="button"
+                          onClick={() => handleChange(item.id, id, 0)}
+                        >
+                          x
+                        </Button>
+                      </td>
+                    </tr>
+                  )
+                })}
+
             </tbody>
           </Table>
         ) : (
@@ -86,7 +98,7 @@ const PantrySingle = ({ ingredients }) => {
                   <th>Category</th>
 
                   <th>Quantity</th>
-                  <th>UOM</th>
+                  <th>Unit of Measure</th>
                   <th>Remove</th>
                 </tr>
               </thead>
