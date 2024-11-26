@@ -25,12 +25,12 @@ steps:
   # Step 3: Copy necessary files to artifact staging directory
   - task: CopyFiles@2
     inputs:
-      SourceFolder: $(System.DefaultWorkingDirectory)
+  #    SourceFolder: $(System.DefaultWorkingDirectory)
       Contents: |
         server/**          # Server-side code
         public/**          # Static assets and bundled output (bundle.js)
-        package.json       # Required for npm start in production
-        package-lock.json  # Lock file for reproducible installs
+        # package.json       # Required for npm start in production
+        # package-lock.json  # Lock file for reproducible installs
       TargetFolder: $(Build.ArtifactStagingDirectory)
     displayName: 'Copy necessary files to artifact staging directory'
 
