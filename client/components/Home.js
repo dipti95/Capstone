@@ -30,7 +30,7 @@ const Home = (props) => {
       <div className={styles.charts}>
         <Card className={styles.chartCard}>
           <Card.Body>
-            <VisualNutrition />
+            <Visual2 />
           </Card.Body>
         </Card>
         <Card className={styles.chartCard}>
@@ -40,7 +40,7 @@ const Home = (props) => {
         </Card>
         <Card className={styles.chartCard}>
           <Card.Body>
-            <Visual2 />
+            <VisualNutrition />
           </Card.Body>
         </Card>
         <Card className={styles.chartCard}>

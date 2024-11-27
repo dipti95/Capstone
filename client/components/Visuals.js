@@ -19,7 +19,7 @@ const Visuals = () => {
 
   useEffect(() => {
     dispatch(fetchAllPantries(id))
-  }, [])
+  }, [dispatch, id])
 
   let data = pantries.map((pantry) => {
     const contents = pantry.ingredients.map((ingredient) => {
@@ -35,8 +35,6 @@ const Visuals = () => {
       contents: contents,
     }
   })
-
-  //console.log("Here's state", pantries)
 
   const selectPantry = (pantries, pantryName) => {
     const selectedPantry = pantries.filter(
@@ -80,85 +78,95 @@ const Visuals = () => {
   const categoricalData = groupByCategory(data)
 
   return (
-    <div style={{ height: "550px" }}>
-      <>
-        <select name="pantries" onChange={(e) => handlePantryChange(e)}>
-          <option value="View All Pantries">View All Pantries</option>
-          {pantries.map((pantry) => (
-            <option key={pantry.id} value={pantry.name}>
-              {pantry.name}
-            </option>
-          ))}
-        </select>
-
-        <VictoryChart
-          theme={VictoryTheme.material}
-          domainPadding={{ x: 20 }}
-          height={500}
-          width={700}
-          animate={{ duration: 500 }}
-        >
-          <VictoryLabel
-            text={
-              selectedPantry === "View All Pantries"
-                ? "Quantities of Foods in All Your Pantries"
-                : `Quantities of Foods in Your ${selectedPantry} Pantry`
-            }
-            x={350}
-            y={-10}
-            textAnchor="middle"
-            style={{ fontSize: 25 }}
-          />
-          <VictoryAxis
-            axisLabelComponent={<VictoryLabel />}
-            label={"My Food"}
-            crossAxis
-            style={{
-              tickLabels: {
-                angle: -45,
-                fontSize: 10,
-                textAnchor: "end",
-                padding: 2,
-              },
-              axisLabel: {
-                label: "My Food",
-                fontFamily: "inherit",
-                fontWeight: 100,
-                letterSpacing: "1px",
-                fontSize: 20,
-                // padding: 50,
-                padding: 100,
-              },
-            }}
-          />
-          <VictoryAxis
-            dependentAxis
-            axisLabelComponent={<VictoryLabel />}
-            label={"Quantity"}
-            tickFormat={(t) => (Number.isInteger(t) ? t : null)}
-            style={{
-              tickLabels: { fontSize: 10 },
-              axisLabel: {
-                label: "Quantity",
-                fontFamily: "inherit",
-                fontWeight: 100,
-                letterSpacing: "1px",
-                fontSize: 20,
-                padding: 32,
-              },
-            }}
-          />
-          <VictoryBar
-            barWidth={({ index }) => index * 2 + 12}
-            data={categoricalData}
-            style={{
-              data: { fill: "#2c5f34" },
-            }}
-            x="category"
-            y="quantity"
-          />
-        </VictoryChart>
-      </>
+    <div style={{ height: "500px", padding: "10px" }}>
+      {" "}
+      {/* Reduced height */}
+      <select
+        name="pantries"
+        onChange={(e) => handlePantryChange(e)}
+        style={{ marginBottom: "20px" }}
+      >
+        <option value="View All Pantries">View All Pantries</option>
+        {pantries.map((pantry) => (
+          <option key={pantry.id} value={pantry.name}>
+            {pantry.name}
+          </option>
+        ))}
+      </select>
+      <VictoryChart
+        // theme={VictoryTheme.material}
+        // domainPadding={{ x: 50 }} // Adjusted for compactness
+        // height={400} // Reduced chart height
+        // width={600} // Reduced chart width
+        // animate={{ duration: 500 }}
+        // padding={{ top: 50, bottom: 100, left: 80, right: 40 }} // Adjusted padding for alignment
+        domainPadding={{ x: 40 }}
+        height={500}
+        width={700}
+        animate={{ duration: 500 }}
+        padding={{ top: 80, bottom: 120, left: 100, right: 50 }}
+      >
+        <VictoryLabel
+          text={
+            selectedPantry === "View All Pantries"
+              ? "Quantities of Foods in All Your Pantries"
+              : `Quantities of Foods in Your ${selectedPantry} Pantry`
+          }
+          x={350} // Adjusted for smaller width
+          y={30} // Moved closer to the chart
+          textAnchor="middle"
+          style={{
+            fontSize: 20, // Slightly smaller font size for a smaller chart
+          }}
+        />
+        <VictoryAxis
+          axisLabelComponent={<VictoryLabel />}
+          label="My Food"
+          crossAxis
+          style={{
+            tickLabels: {
+              angle: -45,
+              fontSize: 8, // Reduced font size for tick labels
+              textAnchor: "end",
+              padding: 5,
+            },
+            axisLabel: {
+              fontFamily: "inherit",
+              fontWeight: 100,
+              letterSpacing: "1px",
+              fontSize: 14, // Slightly smaller axis label font
+              padding: 60, // Adjusted padding for compactness
+            },
+          }}
+        />
+        <VictoryAxis
+          dependentAxis
+          axisLabelComponent={<VictoryLabel />}
+          label="Quantity"
+          tickFormat={(t) => (Number.isInteger(t) ? t : null)}
+          style={{
+            tickLabels: { fontSize: 8 }, // Reduced font size for dependent axis
+            axisLabel: {
+              fontFamily: "inherit",
+              fontWeight: 100,
+              letterSpacing: "1px",
+              fontSize: 14, // Slightly smaller font for consistency
+              padding: 50, // Reduced padding to fit a smaller chart
+              angle: -90,
+              textAnchor: "middle",
+            },
+          }}
+        />
+        <VictoryBar
+          barWidth={10} // Adjusted bar width for smaller size
+          data={categoricalData}
+          style={{
+            data: { fill: "#2c5f34" },
+          }}
+          x="category"
+          y="quantity"
+        />
+      </VictoryChart>
     </div>
   )
 }

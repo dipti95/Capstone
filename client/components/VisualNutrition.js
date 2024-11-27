@@ -77,94 +77,84 @@ const VisualNutrition = () => {
   }))
 
   return didLoad ? (
-    // <div style={{ height: "650px", width: "100%", overflowX: "auto" }}>
-    <div style={{ height: "600px" }}>
+    <div style={{ height: "600px", padding: "10px" }}>
       <VictoryChart
-        //domainPadding={{ x: 50, y: 20 }}
-        domainPadding={{ x: 20 }}
+        domainPadding={{ x: 40 }}
         height={500}
         width={700}
-        animate={{
-          duration: 500,
-        }}
-        theme={VictoryTheme.material}
+        animate={{ duration: 500 }}
+        padding={{ top: 80, bottom: 120, left: 100, right: 100 }}
       >
+        {/* Legend */}
         <VictoryLegend
-          x={600}
-          // y={50}
+          x={550} // Adjusted for alignment
           y={20}
           title="Legend"
-          //---
+          centerTitle
           orientation="vertical"
           gutter={20}
           style={{
             border: { stroke: "black" },
-            title: { fontSize: 20 },
+            title: { fontSize: 16 },
           }}
           data={[
-            { name: "Calories", symbol: { fill: "tomato" } },
-            { name: "Fats", symbol: { fill: "orange" } },
-            { name: "Protein", symbol: { fill: "gold" } },
-            { name: "Carbs", symbol: { fill: "cyan" } },
+            { name: "Calories", symbol: { fill: "#D8E9A8" } },
+            { name: "Fats", symbol: { fill: "#4E9F3D" } },
+            { name: "Protein", symbol: { fill: "#1E5128" } },
+            { name: "Carbs", symbol: { fill: "#191A19" } },
           ]}
         />
+
+        {/* Title */}
         <VictoryLabel
           text="Nutrient Content of Foods by Category"
-          // x={400}
-          // y={30}
-          // textAnchor="middle"
-          // style={{ fontSize: 25, padding: 100 }}
           x={350}
-          y={-20}
+          y={20}
           textAnchor="middle"
-          style={{ fontSize: 25 }}
+          style={{ fontSize: 20 }}
         />
+
+        {/* X Axis */}
         <VictoryAxis
-          label={"Food Categories"}
-          crossAxis
+          label="Food Categories"
           style={{
             tickLabels: {
               angle: -45,
               fontSize: 10,
               textAnchor: "end",
-              // padding: 15,
-              padding: 2,
+              padding: 5,
             },
             axisLabel: {
-              label: "Food Categories",
               fontFamily: "inherit",
               fontWeight: 100,
-              fontSize: 20,
-
+              letterSpacing: "1px",
+              fontSize: 16,
               padding: 100,
             },
           }}
         />
+
+        {/* Y Axis */}
         <VictoryAxis
           dependentAxis
           label="Amount (grams)"
-          tickFormat={(t) => (Number.isInteger(t) ? t : null)}
-          // style={{
-          //   tickLabels: { fontSize: 10 },
-          //   axisLabel: {
-          //     fontSize: 20,
-          //     padding: 35,
-          //   },
-          // }}
+          tickValues={[0, 10000, 20000, 30000, 40000]} // 5 marks on Y axis
           style={{
             tickLabels: { fontSize: 10 },
             axisLabel: {
-              label: "Grams",
               fontFamily: "inherit",
               fontWeight: 100,
               letterSpacing: "1px",
-              fontSize: 20,
-              padding: 30,
+              fontSize: 16,
+              padding: 70,
+              angle: -90,
+              textAnchor: "middle",
             },
           }}
         />
 
-        <VictoryStack colorScale={["tomato", "orange", "gold", "cyan"]}>
+        {/* Bars */}
+        <VictoryStack colorScale={["#D8E9A8", "#4E9F3D", "#1E5128", "#191A19"]}>
           <VictoryBar data={caloriesData} />
           <VictoryBar data={fatsData} />
           <VictoryBar data={proteinData} />
